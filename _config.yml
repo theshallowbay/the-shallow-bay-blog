@@ -1,6 +1,6 @@
 # Site settings
-title:       Cast the compressed
-email:       
+title:       Cast the code
+email:       danjame@hotmail.com
 author:      Shallow Bay
 description: "Ten grandes ideas, escribe código y comparte el conocimiento. Blog de desarrollo de software de Shallow Bay."
 baseurl:     ""
@@ -17,7 +17,7 @@ google_tag_manager:
 bing_verification:
 
 # Optional features
-animated:             false
+animated:             true
 show_related_posts:   false
 show_post_footers:    false
 show_social_icons:    false
@@ -37,7 +37,7 @@ facebook_appid:
 facebook_comments_number: 10
 
 # Social icons
-github_username:
+github_username: theshallowbay
 bitbucket_username:
 stackoverflow_id:
 twitter_username:
@@ -54,35 +54,35 @@ flattr_button:
 # Post sharing icons
 show_sharing_icons: false
 # Change to 'true' to enable individual icons
-share_facebook: false
-share_twitter: false
+share_facebook: true
+share_twitter: true
 share_googleplus: false
 share_linkedin: false
 share_digg: false
-share_tumblr: false
+share_tumblr: true
 share_reddit: false
 share_stumbleupon: false
 share_hackernews: false
 
 text:
   pagination:
-    newer: 'Newer'
-    older: 'Older'
+    newer: 'más antiguo'
+    older: 'más reciente'
   share_buttons:
-    text:         'Share this post!'
-    facebook:     'Share on Facebook'
-    twitter:      'Share on Twitter'
+    text:         'Rotar esto'
+    facebook:     'Compartir en Facebook'
+    twitter:      'Compartir en Twitter'
     googleplus:   'Share on Google+'
     linkedin:     'Share on LinkedIn'
     digg:         'Share on Digg'
-    tumblr:       'Share on Tumblr'
+    tumblr:       'Compartir en Tumblr'
     reddit:       'Share on Reddit'
     stumbleupon:  'Share on StumbleUpon'
     hackernews:   'Share on Hacker News'
   post:
-    updated:        'Updated'
-    minute_read:    'minute read'
-    related_posts:  'Related Posts'
+    updated:        'Al día'
+    minute_read:    'minutos leídos'
+    related_posts:  'Publicaciones relacionadas'
   index:
     coming_soon: 'Coming soon...'
   contact:
