@@ -1,20 +1,13 @@
 ---
-layout: page
-title: About Pixyll
-permalink: /about/
-tags: about
+layout: center
+permalink: /404.html
 ---
 
-This Jekyll theme was crafted with <3 by [John Otander](http://johnotander.com)
-([@4lpine](https://twitter.com/4lpine)).
+# 404
 
-Checkout the [Github repository](https://github.com/johnotander/pixyll) to download it,
-request a feature, report a bug, or contribute. It's free, and open source
-([MIT](http://opensource.org/licenses/MIT)).
+Caramba, parece que esta página no existe. Intentaremos arreglarlo pronto. 
 
-Thanks to the following:
-
-* [BASSCSS](http://basscss.com)
-* [Jekyll](http://jekyllrb.com)
-* [Refills](http://refills.bourbon.io/)
-* [Type Scale](http://type-scale.com/)
+<div class="mt3">
+  <a href="{{ site.baseurl }}/" class="button button-blue button-big">Inicio</a>
+  <a href="{{ site.baseurl }}/contact/" class="button button-blue button-big">Contacto</a>
+</div>
