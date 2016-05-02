@@ -86,13 +86,13 @@ text:
   index:
     coming_soon: 'Coming soon...'
   contact:
-    email:    'Email Address'
-    content:  'What would you like to say?'
-    subject:  'New submission!'
-    submit:   'Say Hello'
+    email:    'Correo electrónico'
+    content:  '¿Que te gustaría decirnos?'
+    subject:  'Describe tus opiniones'
+    submit:   'Enviar'
     ajax:
-      sending:  'sending..'
-      sent:     'Message sent!'
+      sending:  'enviando..'
+      sent:     '¡Enviado!'
       error:    'Error!'
   thanks: 'Thanks for contacting us. We will reply as soon as possible.'
   og_locale: 'en_US'
