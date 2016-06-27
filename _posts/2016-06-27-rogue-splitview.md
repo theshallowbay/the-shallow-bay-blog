@@ -6,7 +6,7 @@ summary: Conoce cómo se construyen las plantillas prediseñadas para empezar tu
 categories: templates
 ---
 
-_![The Jester, from Daze](https://67.media.tumblr.com/fa6832893a531cc8537ebf01f7246e76/tumblr_inline_o9f3rhkl8P1r7pczk_540.png)_
+__![The Jester, from Daze](https://67.media.tumblr.com/fa6832893a531cc8537ebf01f7246e76/tumblr_inline_o9f3rhkl8P1r7pczk_540.png)__
 
 > Rogue: pícaro. Claro, por Poets of the Fall.
 
