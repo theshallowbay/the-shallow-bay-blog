@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Rogue, crea una aplicación con el diseño de menú hamburguesa
-date: 2016-06-26
+date: 2016-06-27 01:22:10
 summary: Conoce cómo se construyen las plantillas prediseñadas para empezar tus propios diseños de interfaces. Con Rogue haremos una primera aproximación a la arquitectura del patrón de navegación con el menú hamburguesa.
 categories: templates
 ---
