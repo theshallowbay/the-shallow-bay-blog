@@ -7,8 +7,7 @@ categories: editorial
 ---
 Un saludo camarada, bienvenido al blog de desarrollo de Shallow Bay enfocado al desarrollo de aplicaciones para la Plataforma Universal de Windows UWP.
 
-##Qué nos espera
-
+#Qué nos espera
 
 En los próximos meses estaremos publicando información del estado de los proyectos que estamos llevando a cabo. Por lo general nuestras aplicaciones son de código abierto así que puedes echarle un vistazo a nuestros [repositorios](http://github.com/theshallowbay) en GitHub y sugerir ideas.
 
@@ -16,8 +15,7 @@ Shallow Bay no debe ser visto como un proyecto personal, sino como uno a gran es
 
 ![lo que pudo haber sido nuestro logo](https://scontent.feoh1-1.fna.fbcdn.net/v/t1.0-9/1013633_1086397184723714_586037629802115546_n.png?oh=1a4bf2e770700e55264e53bd9439e13b&oe=5860A6DF)
 
-##Hola mundo
-
+#Hola mundo
 
 Yo también empecé siendo un novato -como todos- y no importa si tú también lo eres o si ya tienes experiencia en este mundillo. Hace poco más de dos años, empezando el 2014, tuve mi primer contacto directo con la programación, en una asignatura precisamente enfocada a eso: "Programación en C / C++". Aunque ya desde muy niño me había interesado mucho en el tema, no fue sino hasta ese momento que me pude dar cuenta que podía y *debía* reforzar ese hobby y convertirlo en una experiencia de vida gratificante. Digo muy desde niño porque, precisamente cuando tenía 10 años encontré en casa de mi abuela una colección de libros que pertenecieron a mi tío de cuando hizo un curso de sistemas alrededor del año 2001. Era una colección de la más variada, aunque mi memoria me falla y solo recuerdo con esfuerzo algunos temas de los que trataban: 
 
