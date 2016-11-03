@@ -1,6 +1,6 @@
 ---
 layout: post
-title: miuis conceptos fundamentales
+title: miuis, conceptos fundamentales
 date: 2016-11-02 11:00:00
 summary: resumen
 categories: miuis
