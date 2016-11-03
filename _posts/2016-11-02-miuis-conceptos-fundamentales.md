@@ -12,7 +12,7 @@ Hay una necesidad que no ha sido cubierta (bueno sí, pero de forma parcial). Al
 ## Motivación
 Atrás en el 2013, unos chicos de la universidad [lanzaron](https://www.facebook.com/uisenlinea/posts/10152928297414558) una aplicación llamada **Uisers**, que permite precisamente eso, calcular la nota final de la asignatura en base a los porcentajes y las notas de los exámenes. Fue lanzada para [Android](https://play.google.com/store/apps/details?id=co.tuister.uisers&hl=es_419) y para [iOS](https://itunes.apple.com/us/app/id923410614), pero al parecer no se actualiza desde hace más de año y medio. Tampoco existe una versión para Windows, por lo que consideramos conveniente ponernos manos a la obra.
 
-![Uisers para Andriod](https://lh5.ggpht.com/8mQctaSsIMFv2xdwbI09OdxMKa-5rDghM1ps6lHTbEQwZIf1Sf382Ni89omBeOqczA4=h900-rw)
+![Uisers para Android](https://i.imgur.com/nrCcfDL.png)
 
 El objetivo principal de este proyecto será crear una aplicación universal para Windows que permita a los estudiantes llevar el control de los registros de sus calificaciones, calcular el promedio semestral, calcular el promedio ponderado, recibir información importante de la universidad y tenerlo todo sincronizado entre dispositivos.
 
