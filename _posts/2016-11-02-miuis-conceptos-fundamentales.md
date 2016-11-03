@@ -2,10 +2,11 @@
 layout: post
 title: miuis, conceptos fundamentales
 date: 2016-11-02 11:00:00
-summary: Las primeras pinceladas de lo que será nuestra primera aplicación: llevar de forma eficiente el control de las notas de las asignaturas vistas en la universidad. Como estudiantes, sabemos lo importantes que son las notas, lo importantísimo que es mantener el promedio y sobre todo, lo importante que es llevar un orden. ¿Hay una aplicación para eso?
+summary: 
 categories: miuis
 
 ---
+Las primeras pinceladas de lo que será nuestra primera aplicación: llevar de forma eficiente el control de las notas de las asignaturas vistas en la universidad. Como estudiantes, sabemos lo importantes que son las notas, lo importantísimo que es mantener el promedio y sobre todo, lo importante que es llevar un orden. ¿Hay una aplicación para eso?
 
 Hay una necesidad que no ha sido cubierta (bueno sí, pero de forma parcial). Al finalizar el semestre, queremos saber qué tan bien o qué tan mal nos ha ido, por lo que procedemos a realizar el cálculo con los porcentajes de cada nota de cada asignatura. Es fácil hacerlo a lápiz y papel, si estamos en los primeros semestres de la carrera, pero cuando ya hemos avanzado un tiempo, se hace más laborioso el cálculo y toca recurrir a herramientas como el *Excel* y sus fórmulas. Así que de ahí surgió la idea de crear una aplicación que haga incluso más fácil este cálculo.
 
