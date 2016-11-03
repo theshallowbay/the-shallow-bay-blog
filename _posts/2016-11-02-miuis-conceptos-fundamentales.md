@@ -1,6 +1,6 @@
 ---
 layout: post
-title: miuis - conceptos fundamentales
+title: miuis, conceptos fundamentales
 date: 2016-11-02 12:32:18
 summary: Las primeras pinceladas de lo que será nuestra primera aplicación: llevar de forma eficiente el control de las notas de las asignaturas vistas en la universidad. Como estudiantes, sabemos lo importantes que son las notas, lo importantísimo que es mantener el promedio y sobre todo, lo importante que es llevar un orden. ¿Hay una aplicación para eso?
 categories: miuis
