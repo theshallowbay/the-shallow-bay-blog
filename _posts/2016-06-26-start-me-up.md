@@ -5,15 +5,16 @@ date: 2016-06-26 12:32:18
 summary: Dile hola al mundo, echa un vistazo a todo lo asombroso que nos espera en esta bahía superficial y por qué hemos llegado hasta aquí
 categories: editorial
 ---
-Un saludo camarada, bienvenido al blog de desarrollo de Shallow Bay enfocado al desarrollo de aplicaciones para la Plataforma Universal de Windows UWP.
+Un saludo, bienvenido/a al blog de desarrollo de Shallow Bay enfocado al desarrollo de aplicaciones para la Plataforma Universal de Windows UWP.
 
 ## Qué nos espera
 
 En los próximos meses estaremos publicando información del estado de los proyectos que estamos llevando a cabo. Por lo general nuestras aplicaciones son de código abierto así que puedes echarle un vistazo a nuestros [repositorios](http://github.com/theshallowbay) en GitHub y sugerir ideas.
 
-Shallow Bay no debe ser visto como un proyecto personal, sino como uno a gran escala y a largo plazo, porque espero recibir ayuda de todos ustedes en este proceso. Es por eso que cuando servidor escribe lo hace como un *nosotros* y no como un *yo*. Pero por ahorita y solo por explicar otra vez [lo ya explicado](http://blog.theshallowbay.co/about/) servidor habla en primera persona.
+Shallow Bay no debe ser visto como un proyecto personal, sino como uno a gran escala y a largo plazo, porque espero recibir ayuda de todos en este proceso. Es por eso que cuando servidor escribe lo hace como un *nosotros* y no como un *yo*. Por ahora y solo por explicar otra vez [lo ya explicado](http://blog.theshallowbay.co/about/) servidor habla en primera persona.
 
-![lo que pudo haber sido nuestro logo](https://scontent.feoh1-1.fna.fbcdn.net/v/t1.0-9/1013633_1086397184723714_586037629802115546_n.png?oh=1a4bf2e770700e55264e53bd9439e13b&oe=5860A6DF)
+![lo que pudo haber sido nuestro logo](https://68.media.tumblr.com/0bca4f1408e0fb5ee0aef281f5eb2471/tumblr_inline_opx3vdrX6A1r7pczk_540.png)
+>No, este no es nuestro logo, pero si un prototipo final
 
 ## Hola mundo
 
@@ -45,21 +46,22 @@ Guardé la canción en mis favoritos y empecé a escuchar más canciones de esa 
 ![The diary of Jane](https://pbs.twimg.com/media/B05FMUGIUAAq3pT.jpg)
 
 El último álbum que había lanzado BB en ese entonces era del 2011, llamado precisamente así, **Shallow Bay: the best of Breaking Benjamin** que, de hecho también es una canción del primer álbum que lanzaron en el 2002, *Saturate* ¿por qué no llamar también así al proyecto que tenía en mente?
-La otra opción era *Echoplex* aunque finalmente me decidí por The Shallow Bay, que suena y se ve mejor.
+La otra opción era *Echoplex*, que es una canción de NIN del álbum del 2009 *The Slip*; aunque finalmente me decidí por The Shallow Bay, que suena y se ve mejor.
 
-<iframe width="320" height="240" src="https://www.youtube.com/embed/rTiGlNDnOtE" frameborder="0" allowfullscreen></iframe>
+<iframe Width="480" Height="480" src="https://www.youtube.com/embed/rTiGlNDnOtE" frameborder="0" allowfullscreen></iframe>
 
-### La convergencia ya está aquí
+## La convergencia ya está aquí
 
 ![oh my gosh](http://www.microsoftinsider.es/wp-content/uploads/2015/07/AP417796817845.jpg)
 
-Empezando el 2015 entonces asistí vislumbrado (que no presencialmente) a aquel evento del 21 de enero en el que Microsoft prensetó al mundo por primera vez lo que sería *Continuum*, y volví a quedar encantado. Si había alguien que se estaba forjando un ecosistema brutal eran ellos. Por lo que ya podía ver por dónde me debía ir: por ese camino que es el que me ha traído hasta aquí. Con la premisa de escribir código una vez y poder ejecutarlo en donde sea me vendieron la moto. Sí, la idea no es nueva, ya Canonical también había hecho algo parecido e incluso ese es el enfoque de Java (de manera un poco diferente). Pero para mí el camino es este, porque la convergencia es el próximo gran boom que ya está pasando y se llama Windows 10.
+A principios del 2015 entonces asistí vislumbrado (que no presencialmente) a aquel evento del 21 de enero en el que Microsoft prensetó al mundo por primera vez lo que sería *Continuum*, y volví a quedar encantado. Si había alguien que se estaba forjando un ecosistema brutal eran ellos. Por lo que ya podía ver por dónde me debía ir: por ese camino que es el que me ha traído hasta aquí. Con la premisa de escribir código una vez y poder ejecutarlo en donde sea me vendieron la moto. Sí, la idea no es nueva, ya Canonical también había hecho algo parecido e incluso ese es el enfoque de Java (de manera un poco diferente). Pero para mí el camino es este, porque la convergencia es el próximo gran boom que ya está pasando y se llama Windows 10.
 
-Invito encarecidamente al lector, si es un novato en la programación, que empiece desde lo más básico y no se asuste ni se sienta mal por no entender o sentir que se va demasiado lento. Cursos hay muchos en internet, de los cuales recomiendo mucho los que hay disponibles en la [MVA](http://mva.microsoft.com) marcados como *Absolute Beginners* (saber inglés es fundamental también).
+Invito encarecidamente al lector, si es un novato en la programación, que empiece desde lo más básico y no se asuste ni se sienta mal por no entender o sentir que se va demasiado lento. Cursos hay muchos en internet, de los cuales recomiendo mucho los que hay disponibles en la [MVA - Microsoft Virtual Academy](http://mva.microsoft.com) marcados como *Absolute Beginners* (saber inglés es fundamental también).
 
-Trataremos de explicar de la mejor manera y de estar atentos a todo el feedback que nos quieran dejar.
+Trataremos de explicar de la mejor manera y de estar atentos a toda la retroalimentación y comentarios que nos quieran dejar.
 
-![nuestro logo](https://scontent.feoh1-1.fna.fbcdn.net/v/t1.0-9/12020035_1119772824719483_4384336744770996602_n.png?oh=797164bf429e01e1aad4b8c18b3a43d4&oe=586BD9C7)
+![nuestro logo](https://68.media.tumblr.com/181e5c436b1256e59d61c03dae951cb2/tumblr_inline_opx49kIT4O1r7pczk_540.png)
+>Nuestro logo. Claro, hasta que hagamos otro que nos guste más
 
 Servidor firma como [The Pirate Jester](https://twitter.com/thepiratejester) y os saluda.
 

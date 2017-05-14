@@ -2,9 +2,8 @@
 layout: post
 title: Plataforma Universal de Windows (UWP) para principiantes
 date: 2016-11-01 12:32:18
-summary: La eterna promesa de la convergencia por fin se hace realidad. Antes de empezar a publicar cosas por aquí, debemos dejar claro la naturaleza de las mismas. Universal Windows Platform es el cimiento fundamental sobre el cual haremos todo lo demás. Vamos a explicar como empezar, así que manos a la obra. Sinceramente esperamos que esto sea el inicio de la motivación para realizar tus metas.
+summary: La eterna promesa de la convergencia por fin se está haciendo realidad (pasito a pasito). Antes de empezar a publicar cosas por aquí, debemos dejar claro la naturaleza de las mismas. Universal Windows Platform es el cimiento fundamental sobre el cual haremos todo lo demás. Vamos a explicar como empezar, así que manos a la obra. Sinceramente esperamos que esto sea el inicio de la motivación para realizar tus metas.
 categories: UWP
-
 ---
 
 La Plataforma Universal de Windows (UWP para los amigos) es el término utilizado para describir el conjunto de herramientas y APIs que permiten construir aplicaciones que pueda correr universalmente en cualquier dispositivo con Windows.
