@@ -1,7 +1,7 @@
 ---
 published: false
 layout: post
-date: {}
+date: 2017-06-20 20:00:00
 summary: Aquí va un resumen del post
 categories: tutoriales
 title: Diseño de base de datos
