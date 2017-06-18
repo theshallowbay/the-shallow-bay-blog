@@ -1,7 +1,7 @@
 ---
 published: false
 layout: post
-date: {}
+date: 2017-06-17T20:00:00.000Z
 summary: Aquí va un resumen del post
 categories: tutoriales
 ---
