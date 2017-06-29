@@ -21,7 +21,7 @@ Una base de datos se crea para almacenar y recuperar datos. Esto significa que q
 
 Para esas tareas se inventó entonces un lenguaje de consultas llamado el **Lenguaje de Consulta Estructurada**, o SQL. Tanto SELECT como INSERT son operaciones que forman parte de ese lenguaje. Por ejemplo, podemos ver en la siguiente imagen una consulta en SQL con SELECT y su resultado:
 
-![enter image description here](https://i.imgur.com/6BcsLZq.png)
+![](https://i.imgur.com/6BcsLZq.png)
 
 SQL ya en sí mismo en su tema bastante grande, por lo que está por fuera del alcance de éste artículo. Aquí nos enfocaremos estrictamente en el **diseño de las bases de datos**.  Discutiremos los fundamentos de SQL en un tutorial separado en el futuro.
 
@@ -29,6 +29,7 @@ SQL ya en sí mismo en su tema bastante grande, por lo que está por fuera del a
 Aquí te mostraremos cómo crear un modelo de bases de datos **relacional**, el cual es un modelo que describe cómo organizar datos en tablas y cómo definir relaciones entre esas tablas, esto resulta en un diagrama de base de datos o Diagrama de Entidad-Relación como el que se puede ver en la siguiente imagen:
 
 ![Ejemplo tomado de MySQL Workbench](https://i.imgur.com/hcWJf1z.png)
+*Ejemplo tomado de MySQL Workbench*
 
 ## Acerca de los ejemplos
 Para los ejemplos en este tutorial se usaron varias aplicaciones:
@@ -50,11 +51,12 @@ Ahora veamos un breve repaso de la evolución de las bases de datos, así que co
 # Un poco de historia
 En los 70's y 80's, cuando los científicos computacionales todavía vestían chaquetas marrones de esmoquín y gafas con marcos grandes y cuadrados, los datos se solían almacenar en **archivos planos**, que son documentos de texto en los cuales los datos son separados (normalmente) por comas o tabulaciones.
 
-![Como los IT pro lucían en los setenta](https://i.imgur.com/z0PRObB.jpg) *Sí, ese en la esquina inferior izquierda es Bill Gates*
+![Como los IT pro lucían en los setenta](https://i.imgur.com/z0PRObB.jpg) 
+*Sí, ese en la esquina inferior izquierda es Bill Gates*
 
 Los archivos planos todavía se usan para representación de listas simples de datos. El formato de Valores Separados por Comas (CSV, *Comma Separated Values*) es muy popular y ampliamente soportado por diferentes programas y sistemas operativos, por ejemplo el Microsoft Excel. Los datos contenidos en un archivo plano pueden ser leídos por un progama. Un ejemplo de cómo luce un archivo plano puede ser el siguiente:
 
-![enter image description here](https://i.imgur.com/ClhjPZU.png)
+![](https://i.imgur.com/ClhjPZU.png)
 
 Un programa que esté leyendo este archivo plano tendría que decírsele que los datos están separados por comas. Si quisiera seleccionar la **categoría** en la que está **Tutorial de diseño de bases de datos**, tendría que leer el archivo línea por línea hasta encontrar las palabras "Tutorial de diseño de bases de datos" y luego tendría que leer la palabra después de la coma para encontrar la categoría **Software**.
 
@@ -62,7 +64,7 @@ Un programa que esté leyendo este archivo plano tendría que decírsele que los
 
 Leer un archivo plano línea por línea no es muy eficiente. En una **base de datos relacional** los datos se almacenan en **tablas**. La siguiente tabla contiene los mismos datos que el archivo plano. Cada **fila** o **"registro"** contiene un tutorial. Cada **columna** representa una propiedad del tutorial, en este caso el título y la categoría.
 
-![enter image description here](https://i.imgur.com/JSDer4S.png)
+![](https://i.imgur.com/JSDer4S.png)
 
 Un programa puede buscar en la columna **tutorial_id** de esta tabla para un id específico y encontrar rápidamente el correspondiente título y categoría. Esto es mucho más rápido que ir por todos los datos línea por línea.
 
@@ -89,8 +91,8 @@ Cada fila de datos en una tabla está identificada por una única "clave" llamad
 
 Usando el Lenguaje de consulta estructurada SQL, los datos de diferentes tablas que estén enlazados por claves pueden seleccionarse de una sola vez. Por ejemplo, haces una consulta que selecciona todas las órdenes desde una **tabla de órdenes** que pertenezcan al usuario con id 3 (mike) desde la **tabla de usuarios**.  Hablaremos más en detalle de las claves más adelante en éste artículo.
 
-![enter image description here](https://i.imgur.com/1LiNPo9.jpg)
-> La columna id de esta tabla es la "clave primaria". Cada registro tiene una única llave primaria, usualmente un número. La columna grupo es una columna de "claves foráneas". A juzgar por su nombre, probablemente referencia una tabla que contiene grupos de usuarios.
+![](https://i.imgur.com/1LiNPo9.jpg)
+*La columna id de esta tabla es la "clave primaria". Cada registro tiene una única llave primaria, usualmente un número. La columna grupo es una columna de "claves foráneas". A juzgar por su nombre, probablemente referencia una tabla que contiene grupos de usuarios*
 
 ## Evitar la redundancia de datos
 En un diseño de bases de datos que se adhiera a las reglas del modelo relacional, cada elemento de datos, un nombre de usuario por ejemplo, se almacena una sóla vez, esto es, en un único lugar. Así se evita tener que mantener los mismos datos en varios lugares. La duplicación de datos se llama **redundancia de datos** y debe ser evitada en un buen diseño.
@@ -98,8 +100,8 @@ En un diseño de bases de datos que se adhiera a las reglas del modelo relaciona
 ## Limitando la entrada
 Usando una base de datos relacional puedes especificar qué tipo de datos está permitido en una columna de la base de datos. Puedes crear campos que contengan números, números decimales, textos cortos, textos largos, fechas, entre otros.
 
-![enter image description here](https://i.imgur.com/EX1p6nF.png)
-> Cuando se define la tabla en una base de datos se debe especificar un tipo para cada columna. 'Varchar' es el tipo de datos en MySQL para un texto corto de máximo 255 caracteres e 'int' es un número entero.
+![](https://i.imgur.com/EX1p6nF.png)
+*Cuando se define la tabla en una base de datos se debe especificar un tipo para cada columna. 'Varchar' es el tipo de datos en MySQL para un texto corto de máximo 255 caracteres e 'int' es un número entero*
 
 Aparte de los tipos de datos, los sistemas de bases de datos permiten aplicar otras restricciones como la **longitud** o como hacer cumplir la **unicidad** de un cierto campo. La restricción de unicidad a menuda se usa para campos que contienen nombres de usuarios y direcciones de correo electrónico.
 
@@ -122,8 +124,8 @@ Para poder ejecutar operaciones en una base de datos, como guardar nuevos datos,
 
 La manera en la que diseñes tu base de datos tiene un efecto directo en las consultas que necesites escribir para recuperar datos. Esta es otra razón importante por la cual es buena idea pensar en cómo diseñas. Con una base de datos bien diseñada puedes escribir consultas SQL limpias y fáciles.
 
-![enter image description here](https://i.imgur.com/6BcsLZq.png)
-> Una consulta SQL que selecciona (SELECT) todo el contenido de la tabla USER
+![](https://i.imgur.com/6BcsLZq.png)
+* Una consulta SQL que selecciona (SELECT) todo el contenido de la tabla USER *
 
 ### Portabilidad
 El modelo relacional es un estándar. Al adherirnos a las reglas del modelo relacional nos aseguramos que los datos puedan transferirse entre sistemas de bases de datos relacionales con relativa facilidad.
@@ -133,14 +135,14 @@ Como se dijo anteriormente, el **diseño de la base de datos** se trata de ident
 # Tablas y la clave primaria
 Como aprendimos anteriormente, los datos en una base de datos se guardan en **tablas** que contienen **filas** o **registros**.  Retomemos el ejemplo anterior de la tabla que cotiene información acerca de tutoriales:
 
-![enter image description here](https://i.imgur.com/JSDer4S.png)
-> Una tabla con tutoriales
+![](https://i.imgur.com/JSDer4S.png)
+*Una tabla con tutoriales*
 
 Esta tabla consiste en 6 tutoriales. Todos son diferenstes, pero cada tutorial tiene los mismos **campos**, llamados *tutorial _id*, *titulo* y *categoria*, donde *tutorial_id* es la **clave primaria** de la tabla. La **clave primaria** es un valor único para cada registro de la tabla.
 
 En la siguiente tabla de clientes, el *doctor_id* es es la clave primaria. También es un número único para cada registro.
 
-![enter image description here](https://i.imgur.com/YqnFaAh.png)
+![](https://i.imgur.com/YqnFaAh.png)
 
 ## Claves primarias en la vida diaria
 Las claves primarias se usan para identificar registros en una base de datos. Están en nuestro alrededor. Cada vez que encuentras un número único pude que sea una clave primaria en una base de datos (pero no necesariamente tiene que serlo):
@@ -196,8 +198,8 @@ Los **pedidos** pertenecen a un cliente, pero no son una **única** pieza de inf
 
 Creemos la tabla entonces en *SQLyog*.  La siguiente imagen es un ejemplo que cómo luce una tabla cuando es creada usando "new table" en la ventana de SQLyog. Todos los sistemas gráficos de administración de bases de datos tienen interfaces similares para crear tablas. También puedes crear la tabla usando SQL en la línea de comandos, sin interfaz gráfica:
 
-![enter image description here](https://i.imgur.com/spqOiOE.png)
-> Creando una tabla en SQLyog. Nótese que la caja de PK (Clave primaria, Primary Key) está marcada para el campo cliente_id, por lo tanto cliente_id es la clave primaria. También, la caja Auto Incr está marcada, por lo que la base de datos automáticamente proveerá un valor único (incremental) para este campo.
+![](https://i.imgur.com/spqOiOE.png)
+*Creando una tabla en SQLyog. Nótese que la caja de PK (Clave primaria, Primary Key) está marcada para el campo cliente_id, por lo tanto cliente_id es la clave primaria. También, la caja Auto Incr está marcada, por lo que la base de datos automáticamente proveerá un valor único (incremental) para este campo*
 
 ### Diseñar la tabla de pedidos
 ***¿Qué únicas piezas de información pertenecen a un pedido?*** Veamos:
@@ -208,23 +210,23 @@ Creemos la tabla entonces en *SQLyog*.  La siguiente imagen es un ejemplo que c�
 
 La siguiente imagen es el ejemplo de cómo luciría la tabla creada en SQLyog:
 
-![enter image description here](https://i.imgur.com/nQTfeJV.png)
-> Diseño de la tabla de pedidos. El campo cliente es una referencia (una 'clave foránea') a cliente_id en la tabla de clientes.
+![](https://i.imgur.com/nQTfeJV.png)
+*Diseño de la tabla de pedidos. El campo cliente es una referencia (una 'clave foránea') a cliente_id en la tabla de clientes*
 
 Esas dos tablas están enlazadas, porque el campo **cliente** en la tabla de **pedidos** es una referencia a la clave primaria (**cliente_id**) de la tabla de clientes. Tal referencia es llamada una relación de **clave foránea**. Deberías ver la clave foránea como la copia de la llave primaria de otra tabla. En este caso, el **cliente_id** desde la tabla de **clientes** se copia en la tabla de pedidos  de tal forma que cada pedido queda enlazado a un cliente.
 
 ## Crear la relación de clave foránea
 Te estarás preguntando cómo puedes **ver** que el campo *cliente* en la tabla de pedidos referencia al campo *cliente_id* en la tabla de clientes. No puedes, porque aún no te hemos mostrado como creamos la relación.
 
-![enter image description here](https://i.imgur.com/KIA5l72.png)
-> Estableciendo relaciones de claves foráneas entre las tablas de pedidos y clientes
+![](https://i.imgur.com/KIA5l72.png)
+*Estableciendo relaciones de claves foráneas entre las tablas de pedidos y clientes*
 
 En la imagen anterior se puede ver que la columna cliente de la tabla de pedidos queda enlazada a la llave primaria *cliente_id* de la tabla de clientes.
 
 Ahora, cuando veamos los datos que pudieran estar presentes en las tablas de pedidos y clientes, verás cómo están enlazados los clientes y los pedidos:
 
-![enter image description here](https://i.imgur.com/M4ECq92.png)
-> Los pedidos están enlazados con los clientes por medio del campo cliente que referencia a la tabla de clientes.
+![](https://i.imgur.com/M4ECq92.png)
+*Los pedidos están enlazados con los clientes por medio del campo cliente que referencia a la tabla de clientes*
 
 Por los datos arriba presentados, podemos ver que el cliente llamado *Joe* hizo dos pedidos, el cliente *Satya* hizo uno y el cliente *Terry* también hizo uno.
 
@@ -248,13 +250,13 @@ Si no está seguro sólo piensa acerca de qué información quieras almacenar de
 ### No nos pongamos *tan* académicos
 Como puedes ver hay una diferencia entre una entidad y una una tabla real en una base de datos. Los especialistas en IT pueden volverse MUY académicos acerca de esta diferencia. No somos como tales especialistas en IT. Esta diferencia depende de la forma en que veas los datos. Si ves al modelado de datos desde una perspectia de software puedes terminar con un montón de entidades que no se traducen directamente en tablas. En este tutorial estamos mirando a los datos estrictamente desde una perspectiva de la base de datos y en nuestro pequeño mundo una entidad se traduce en una tabla.
 
-![enter image description here](https://i.imgur.com/pnFPdLd.jpg)
-> Y casi lo logras, está muy cerca de tener tu diploma en diseño de base de datos.
+![](https://i.imgur.com/pnFPdLd.jpg)
+*Y casi lo logras, está muy cerca de tener tu diploma en diseño de base de datos*
 
 Como puedes ver, decidir qué entidades tiene tu sistema es un poco de un proceso intelectual que requiere cierta experiencia y que es a menudo una materia que requiere cambiar y repensar y reconsiderar.
 
-![enter image description here](https://i.imgur.com/s3nTpF4.png)
-> Un diagrama entidad-relación puede volverse muy grande si estás construyendo una aplicación compleja. Algunos contienen cientos o incluso miles de tablas.
+![](https://i.imgur.com/s3nTpF4.png)
+*Un diagrama entidad-relación puede volverse muy grande si estás construyendo una aplicación compleja. Algunos contienen cientos o incluso miles de tablas*
 
 ## Relaciones
 El segundo paso de un diseño de bases de datos es decidir qué relaciones existen entre las entidades de tu sistema. Ahora esto puede ponerse un poco complicado. Con algo de experiencia y un poco de (re)consideración puedes terminar con un modelo de base de datos correcto o *al menos* correcto.
@@ -266,8 +268,8 @@ Otro ejemplo de una relación uno-a-muchos es la relación que existe entre madr
 
 Cuando un registro en la tabla A se enlaza con 0, 1 o varios registros de la tabla B, estás trabajando con una **relación uno-a-muchos**. En el modelo relacional una relación uno-a-muchos es modelado usando dos tablas.	
 
-![enter image description here](https://i.imgur.com/dfh0pHW.png)
-> Esquema que representa una relación de uno-a-muchos. Un registro en la tabla A tiene 0, 1 o varios registros asociados en la tabla B.
+![](https://i.imgur.com/dfh0pHW.png)
+*Esquema que representa una relación de uno-a-muchos. Un registro en la tabla A tiene 0, 1 o varios registros asociados en la tabla B*
 
 #### ¿Cómo identificar una relación uno-a-muchos?
 Cuando tengas dos entidades pregúntate estas preguntas:
@@ -292,11 +294,11 @@ La relación entre distribuidores de cerveza y las cervezas que distribuyen es u
 #### Modelar una relación muchos-a-muchos
 Una relación muchos-a-muchos se modela con tres tablas. Dos tablas "fuentes" y una tabla de **unión**. La clave primaria de una tabla de unión *A_B* es una clave **compuesta**, hecha de dos campos: las dos claves foráneas que referencian a la clave primaria de la tabla A y la tabla B.
 
-![enter image description here](https://i.imgur.com/8Bl8zE6.png)
+![](https://i.imgur.com/8Bl8zE6.png)
 
 Todas las claves primarias deben ser únicas. Esto implica que la combinación del **campo A y el B** debe ser único en la tabla A_B. El siguiente ejemplo muestra cómo las tablas que pueden existir en una relación muchos-a-muchos entre marcas de cerveza de Bélgica y sus distribuidores en Holanda. Nótese cómo las combinaciones de *cerveza_id* y *distribuidor_id* son únicas en la tabla de unión.
 
-![enter image description here](https://i.imgur.com/Vf9dQYp.png)
+![](https://i.imgur.com/Vf9dQYp.png)
 
 En las tablas de arriba se enlazan las cervezas y sus distribuidores con una relación muchos-a-muchos usando la tabla de unión *cerveza_distribuidor*. Nótese que "Gentse Tripel" (157) es distribuída por Horeca Import NL (157, AC001), Jansen Horeca (157, AB899) y Peterson Drankenhandel (157, AC009). Viceversa, Peterson Drankenhandel es el distribuidor de tres cervezas: Gentse Tripel (157, AC009), Uilenspiegel (158, AC009) y Jupiler (163, AC009).
 
@@ -307,7 +309,7 @@ Hay otra cosa imporante por notar acerca de la relación muchos-a-muchos: consis
 #### Otro ejemplo: reservaciones en un hotel
 Como ejemplo final dejános mostrarte cómo podría modelarse las reservas de habitaciones en un hotel por los huéspedes.
 
-![enter image description here](https://i.imgur.com/V7NW8Jx.png)
+![](https://i.imgur.com/V7NW8Jx.png)
 
 En este ejemplo vemos que hay una relación muchos-a-muchos entre huéspuedes y habitaciones. Una habitación puede ser reservada por varios huéspuedes al pasar el tiempo y al pasar el tiempo un huésped puede reservar varias habitaciones en el hotel. La tabla de unión en este ejemplo no es una tabla de unión clásica que consiste de sólo dos claves foráneas, sino que es una entidad separada que tiene relación con otras dos entidades.
 
@@ -325,7 +327,7 @@ En casos raros, una relación uno-a-uno se modela usando dos tablas separadas. T
 #### Ejemplos de relación uno-a-uno
 - Las personas y sus pasaportes. Sin embargo, esto solo cuenta si miramos a sus pasaportes actuales. Cada persona tienen un único, actual pasaporte y cada pasaporte pertenece a una única persona.
 
-![enter image description here](https://i.imgur.com/gD5kZyD.png)
+![](https://i.imgur.com/gD5kZyD.png)
 
 Un diseño de base de datos relacional es una colección de tablas que están interrelacionadas por claves primarias y claves foráneas. El modelo relacional comprende un número de reglas que te ayudan a descubrir la relaciones correctas entre los datos. Esas reglas son llamadas las *formas normales*. Ahora veamos como normalizar una base de datos.
 
@@ -362,14 +364,14 @@ Mejor aún, cuando no hay un obvio candidato a la clave primaria, asigna una cal
 
 Tomemos por ejemplo un sitio web de coleccionistas de carros en los que cada collecionista de carro que se registra en el sitio lo hace con sus carros. La tabla siguiente muestra los registros de carros de los usurarios que se registraron en el sitio web:
 
-![enter image description here](https://i.imgur.com/vgwqLTl.png)
-> Duplicación horizontal de los campos es un mal diseño
+![](https://i.imgur.com/vgwqLTl.png)
+*Duplicación horizontal de los campos es un mal diseño*
 
 La duplicación horizontal de los campos es un mal diseño. Con este diseño sólo puedes almacenar hasta cinco carros y si tienes menos de cinco carros estás desperdiciando espacio en la base de datos con columnas vacías.
 
 Otra mala solución es colocar múltiples valores en una celda:
 
-![enter image description here](https://i.imgur.com/hcfuInc.png)
+![](https://i.imgur.com/hcfuInc.png)
 
 La solución correcta aquí es dividir los carros en una tabla separada e incluir una clave foránea que referencie a la tabla de usuarios.
 
@@ -386,8 +388,8 @@ Para que una base de datos esté normalizada de acuerdo a la segunda forma norma
 
 Eso puede sonar un poco académico. Lo que significa que es sólo debes almacenar datos en una tabla que estén directamente relacionados y que no pertenezcan a otra entidad. Adherirse a la segunda forma normal es cuestión de encontrar datos que frecuentemente estén duplicados a través de filas y que puedan pertenecer a una entidad diferente.
 
-![enter image description here](https://i.imgur.com/xAJkWMT.png)
-> Duplicación de datos a través de filas en el campo de tienda
+![](https://i.imgur.com/xAJkWMT.png)
+*Duplicación de datos a través de filas en el campo de tienda*
 
 La tabla de arriba podría pertenecer a una compañía que vende carros y tiene múltiples tiendas en Holanda. Si miras detalladamente la tabla, puedes encontrar múltiples ejemplos de duplicación a través de filas. El campo **marca** puede dividirse en una tabla separada. También, el campo **tipo** puede dividirse un otra tabla que tenga relaciones uno-a-muchos con la tabla *marca*, porque una marca tiene múltiples tipos.
 
@@ -395,7 +397,7 @@ La columna **tienda** contiene la tienda donde se encuentra actualmente el carro
 
 Abajo vemos un ejemplo de cómo se podría modelar mejor la situación de los carros evitando redundancia de datos en la tabla de carros:
 
-![enter image description here](https://i.imgur.com/rGVhPr4.png)
+![](https://i.imgur.com/rGVhPr4.png)
 
 En la configuración anterior, la tabla **carro** tiene una clave foránea referenciada a las tablas *tipo* y *tienda*. Ya no está la columna *marca*, porque está ímplicitamente referenciada a través de la referencia *tipo*. Cuando se referencia un tipo, también se referencia la marca, porque un tipo pertenece a una marca.
 
@@ -415,7 +417,7 @@ La tercera forma normal trata con las **dependencias transitivas**. Una dependen
 
 La tabla de clientes siguiente (mis clientes son jugadores de fútbol franceses y holandeses) contiene relaciones transitivas:
 
-![enter image description here](https://i.imgur.com/Pz6jdPb.png)
+![](https://i.imgur.com/Pz6jdPb.png)
 
 En esta tabla no todos los campos dependen única y exclusivamente de la clave primaria. Existe una relación separada entre *codigo_postal*  y la *ciudad* y la *provincia*. En Holanda, la ciudad y la provincia están determinadas por el código postal, así que no hay necesidad de almacenar la ciudad y la provincia en la tabla de clientes. Si conoces el código postal, conoces la ciudad y la provincia.
 
@@ -425,7 +427,7 @@ En este caso, eliminar las relaciones transitivas de la tabla puede lograrse por
 
 Otro ejemplo de aplicación de la tercera forma normal es esta (muy) sencilla tabla de pedidos de una tienda online:
 
-![enter image description here](https://i.imgur.com/lhTmJ6z.png)
+![](https://i.imgur.com/lhTmJ6z.png)
 
 El *Impuesto de Valor Agregado* es un porcentaje que se le agrega al precio de un producto (19% en la tabla anterior). Esto significa que la cantidad *total_sin_iva* puede calcularse de la cantidad *total_con_iva* y viceversa. Debes almacenar sólo uno de esos dos campos, pero no ambos. Debes dejar la tarea de calcular el *total_con_iva* desde el *total_sin_iva* o viceversa al programa que usa la base de datos.
 
@@ -456,7 +458,7 @@ Una vez hayas identificado las entidades que quieras modelar puedes analizar las
 
 - Clientes y pedidos están enlazados en una relación uno-a-muchos. Cada registro en la tabla *cliente*  puede asociarse con múltiples registros en la tabla de *pedidos* y lo mismo a la inversa, cada registro en *pedidos* es asociado con un registro en *cliente*.
 
-![enter image description here](https://i.imgur.com/8QmN8UD.png)
+![](https://i.imgur.com/8QmN8UD.png)
 
 Las tablas mostradas en el modelo anterior sirven como ejemplo sencillo. Una tabla de clientes en la vida real por supuesto debe tener más datos del cliente (dirección, ciudad, etc.)
 
