@@ -6,7 +6,7 @@ summary: Si vas a crear tu propia base de datos es una buena idea adherirse a la
 categories: tutoriales
 title: Diseño de base de datos
 ---
-Las bases de datos son programas que permiten almacenar y recuperar grandes cantidades de datos relacionados entre sí. Las bases de datos consisten en **tablas** que contienen **datos**. Cuando estés creando una base de datos debes pensar en qué **tablas** vas a crer y qué **relaciones** existen entre los datos de esas tablas. En otras palabras, tienes que pensar acerca del ***diseño*** de tu base de datos. Una base de datos **bien diseñada** asegurará la integridad y la mantenibilidad de tus datos.
+Las bases de datos son programas que permiten almacenar y recuperar grandes cantidades de datos relacionados entre sí. Las bases de datos consisten en **tablas** que contienen **datos**. Cuando estés creando una base de datos debes pensar en qué **tablas** vas a crear y qué **relaciones** existen entre los datos de esas tablas. En otras palabras, tienes que pensar acerca del ***diseño*** de tu base de datos. Una base de datos **bien diseñada** asegurará la integridad y la mantenibilidad de tus datos.
 
 **TABLA DE CONTENIDOS**
 * Tabla de contenidos
