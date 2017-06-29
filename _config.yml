@@ -20,11 +20,11 @@ bing_verification:
 animated:             true
 show_related_posts:   false
 show_post_footers:    false
-show_social_icons:    false
+show_social_icons:    true
 ajaxify_contact_form: false
 enable_mathjax: false
 extended_fonts: true
-enable_anchorjs: false
+enable_anchorjs: true
 
 # Disqus post comments
 # (leave blank to disable Disqus)
@@ -34,7 +34,7 @@ disqus_shortname: shallowware
 # (leave blank to disable Facebook Comments, otherwise set it to true)
 facebook_comments:
 facebook_appid:
-facebook_comments_number: 10
+facebook_comments_number:
 
 # Social icons
 github_username: theshallowbay
@@ -52,7 +52,7 @@ paypal_url:
 flattr_button:
 
 # Post sharing icons
-show_sharing_icons: false
+show_sharing_icons: true
 # Change to 'true' to enable individual icons
 share_facebook: true
 share_twitter: true
@@ -69,7 +69,7 @@ text:
     newer: 'más antiguo'
     older: 'más reciente'
   share_buttons:
-    text:         'Rotar esto'
+    text:         'Compartir esto'
     facebook:     'Compartir en Facebook'
     twitter:      'Compartir en Twitter'
     googleplus:   'Share on Google+'
