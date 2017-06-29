@@ -2,17 +2,16 @@
 published: true
 layout: post
 date: 2017-06-20 20:00:00
-summary: Si vas a crear tu propia base de datos es una buena idea adherirse a las reglas del diseño de bases de datos, porque de esta forma te asegurarás a la larga de contar con integridad y mantenibilidad de tus datos. Este tutorial te enseñará qué son las bses de datos y cómo diseñarlas de tal manera que se conformen con las reglas del diseño de bases de datos relacionales.
+summary: Si vas a crear tu propia base de datos es una buena idea adherirse a las reglas del diseño de bases de datos, porque de esta forma te asegurarás a la larga de contar con integridad y mantenibilidad de tus datos. Este tutorial te enseñará qué son las bases de datos y cómo diseñarlas de tal manera que se conformen con las reglas del diseño de bases de datos relacionales.
 categories: tutoriales
 title: Diseño de base de datos
 ---
 Las bases de datos son programas que permiten almacenar y recuperar grandes cantidades de datos relacionados entre sí. Las bases de datos consisten en **tablas** que contienen **datos**. Cuando estés creando una base de datos debes pensar en qué **tablas** vas a crer y qué **relaciones** existen entre los datos de esas tablas. En otras palabras, tienes que pensar acerca del ***diseño*** de tu base de datos. Una base de datos **bien diseñada** asegurará la integridad y la mantenibilidad de tus datos.
 
 **TABLA DE CONTENIDOS**
-
-<!-- TOC -->
-
-    - [Lenguaje de consulta estrucurada SQL](#lenguaje-de-consulta-estrucurada-sql)
+* Tabla de contenidos
+{:toc}
+- [Lenguaje de consulta estrucurada SQL](#lenguaje-de-consulta-estrucurada-sql)
     - [El modelo relacional](#el-modelo-relacional)
     - [Acerca de los ejemplos](#acerca-de-los-ejemplos)
         - [Base de datos](#base-de-datos)
@@ -79,7 +78,6 @@ Las bases de datos son programas que permiten almacenar y recuperar grandes cant
     - [Conclusiones](#conclusiones)
         - [¿Dónde ir ahora?](#¿dónde-ir-ahora)
 
-<!-- /TOC -->
 
 > NOTA: Este tutorial es una traducción propia de otro que se puede encontrar [aquí](http://en.tekstenuitleg.net/articles/software/database-design-tutorial/intro.html). Si deseas, puedes ir allí y leerlo en inglés. Todo el crédito va para el autor original. La intención de escribirlo aquí en español se rige de acuerdo a nuestra conducta de compartir el conocimiento.
 
