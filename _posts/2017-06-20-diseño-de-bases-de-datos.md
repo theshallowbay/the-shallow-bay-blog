@@ -50,9 +50,7 @@ Ahora veamos un breve repaso de la evolución de las bases de datos, así que co
 # Un poco de historia
 En los 70's y 80's, cuando los científicos computacionales todavía vestían chaquetas marrones de esmoquín y gafas con marcos grandes y cuadrados, los datos se solían almacenar en **archivos planos**, que son documentos de texto en los cuales los datos son separados (normalmente) por comas o tabulaciones.
 
-![Como los IT pro lucían en los setenta](https://i.imgur.com/z0PRObB.jpg) 
-
-> Sí, ese en la esquina inferior izquierda es Bill Gates
+![Como los IT pro lucían en los setenta](https://i.imgur.com/z0PRObB.jpg) *Sí, ese en la esquina inferior izquierda es Bill Gates*
 
 Los archivos planos todavía se usan para representación de listas simples de datos. El formato de Valores Separados por Comas (CSV, *Comma Separated Values*) es muy popular y ampliamente soportado por diferentes programas y sistemas operativos, por ejemplo el Microsoft Excel. Los datos contenidos en un archivo plano pueden ser leídos por un progama. Un ejemplo de cómo luce un archivo plano puede ser el siguiente:
 
