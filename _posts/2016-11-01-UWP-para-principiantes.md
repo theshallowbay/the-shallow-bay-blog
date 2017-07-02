@@ -6,7 +6,7 @@ summary: La eterna promesa de la convergencia por fin se está haciendo realidad
 categories: UWP
 ---
 
-La Plataforma Universal de Windows (UWP para los amigos) es el término utilizado para describir el conjunto de herramientas y APIs que permiten construir aplicaciones que pueda correr universalmente en cualquier dispositivo con Windows.
+La Plataforma Universal de Windows (UWP para los amigos) es el término utilizado para describir el conjunto de herramientas y APIs que permiten construir aplicaciones que pueden correr universalmente en cualquier dispositivo con Windows.
 
 Lo bello de todo esto es que puedes escribir código una sola vez y luego verlo bien en todas las distintas resoluciones y factores de forma que ofrecen estos dispositivos.
 
@@ -26,7 +26,7 @@ No es necesario ser un experto en todo lo anterior, simplemente necesitas tener 
 ## Inglés
 Sí, tal vez sea lo más importante de la lista. **Debes** saber inglés antes de todo lo demás. A estas alturas del paseo ya debiste pasar por mínimo 10 años de cursos de inglés en el colegio. La gran mayoría de documentación y las mejores guías de programación estarán en ese idioma, por lo que es fundamental conocerlo. Si eres de los que se les dificulta el idioma, hay muchísimos recursos disponibles allá afuera a los que puedes acceder totalmente gratis. Es solo cuestión de perseverancia por aprender. En un post futuro hablaremos de cómo mejorar las técnicas de aprendizaje de esta lengua.
 
-##  C#
+##  'C#'
 
 Los siguientes tutoriales te enseñarán lo básico en la programación con C#, además de algunos otros conceptos avanzados relacionados a este lenguaje.
 
