@@ -3,6 +3,7 @@ layout: post
 date: 2017-07-04 11:54:00
 summary: Continuemos en nuestro viaje para aprender el patrón MVVM, aplicado al desarrollo de aplicaciones universales UWP. Después de haber aprendido los conceptos básicos, es tiempo de empezar a escribir algo de código. Usaremos MVVM Light como toolkit para ayudarnos a implementar el patrón, como es el más flexible y simple de usar, será más fácil de entender y aplicar los conceptos básicos que hemos aprendido.
 title: El patrón MVVM - La práctica
+categories: tutoriales
 published: true
 ---
 
@@ -73,7 +74,7 @@ Ahora necesitamos conectar la Vista con el ViewModel, usando la propiedad del Da
 
 ### Declarar el ViewModel como recurso
 
-Digamos que hemos creado un ViewModel llamado MainViewModel. Podemos declararlo com un recurso global en el archivo App.xaml de esta forma:
+Digamos que hemos creado un ViewModel llamado MainViewModel. Podemos declararlo como un recurso global en el archivo App.xaml de esta forma:
 
     <Application x:Class="HolaMundo.App"
 				 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -172,13 +173,14 @@ Esta clase nos da acceso a un método llamado **Set()**, que podemos usar cuando
 	    {
 		    return _nombre;
 		}
+
 		set
 		{
 			Set(ref _nombre, value);
 		}
 	}
 
-Este código es muy similar al que ya vimos anteriormente cuando introdujimos el concepto de la interfaz *INotifyPropertyChanged*. La única diferencia es que, grcias al método *Set()*, podemos matar dos pájaros de un solo tiro: almacenamos el valor en la propiedad **Nombre** y despachamos una notificación al canal binding de que el valor ha cambiado.
+Este código es muy similar al que ya vimos anteriormente cuando [introdujimos el concepto](https://theshallowbay.github.io/tutoriales/2017/07/02/patron-mvvm-introduccion/#la-interfaz-inotifypropertychanged) de la interfaz *INotifyPropertyChanged*. La única diferencia es que, grcias al método *Set()*, podemos matar dos pájaros de un solo tiro: almacenamos el valor en la propiedad **Nombre** y despachamos una notificación al canal binding de que el valor ha cambiado.
 
 Ahora que sabemos cómo crear propiedades, creamos otra para guardar el mensaje que se mostrará al usuario después de que haya presionado el botón.
 
