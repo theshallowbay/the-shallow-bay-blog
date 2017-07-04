@@ -84,7 +84,7 @@ Como ya se mencionó, el binding puede también ser bidireccional: este enfoque 
 
 Si, por ejemplo, en XAML tenemos el siguiente código:
 
-    <TextBox Text="{Binding Path = ProductName, Mode=TwoWay}" />
+    <TextBox Text="{Binding Path=ProductName, Mode=TwoWay}" />
 
 significa que en el ViewModel tendremos una propiedad llamada `ProductName`, que guardará el texto escrito por el usuario en el TextBox.
 
@@ -149,7 +149,7 @@ Sin embargo, con esta sintaxis no se puede cambiar qué pasa cuando el valor de 
 	    {
 		    _nombreProducto = value;
 		    OnPropertyChanged();
-		 }
+		}
 	}
 
 Ahora la propiedad trabajará como se esperaba: cuando cambia su valor, el control *TextBlock* en binding con ella cambiará su apariencia para mostrarla.
@@ -190,7 +190,7 @@ El núclero del comando es el método **Execute()**, que contiene el código que
 
 El método **CanExecute()** es una de las características más interesantes que proveen los comandos, porque puede usarse para manejar el ciclo de vida del comando cuando la aplicación está ejecutándose. Por ejemplo, digamos que tenemos una página con un formulario que se puede llenar, con un botón al final de la página que el usuario presiona para enviar el formulario. Como todos los campos en el formularios son obligatorios, queremos que el botón esté desactivado hasta que todos los campos hayan sido llenados. Si manejamos la operación para enviar el formulario con un comando, podemos implementar el método *CanExecute()* de una forma que devuelva *false* cuando haya al menos un campo vacío. De esta forma, el control *Button* que hemos enlazado al comando automáticamente cambiará su estado visual: estará desactivado y el usuario inmediatamente entenderá que no podrá presionarlo.
 
-> Aquí va una imagen
+![](http://i.imgur.com/1UNWXL1.png)
 
 Al final, el comando ofrece un evento llamado **CanExecuteChanged**, que podemos invocar dentro del ViewModel cada vez que cambie la condición que queremos monitorizar para manejar el estado del comando. Por ejemplo, en el ejemplo anterior, podemos llamar al evento *CanExecuteChanged* cada vez que el usuario llene uno de los campos del formulario.
 
