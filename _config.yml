@@ -93,9 +93,9 @@ text:
     ajax:
       sending:  'enviando..'
       sent:     '¡Enviado!'
-      error:    'Error!'
+      error:    '¡Error!'
   thanks: 'Thanks for contacting us. We will reply as soon as possible.'
-  og_locale: 'en_US'
+  og_locale: 'es_CO'
 
 # Build settings
 markdown:     kramdown
