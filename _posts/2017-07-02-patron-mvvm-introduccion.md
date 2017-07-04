@@ -2,7 +2,7 @@
 layout: post
 title: El patrón MVVM - Introducción
 date: 2017-07-02 11:45:00
-summary: El patrón de diseño Model-View-ViewModel (de ahora en adelante, MVVM) es un tema de *amor-odio* cuando se trata del desarrollo de aplicaciones universales UWP. Si nunca lo has usado y lo intentas por primera vez, probablemente te encontrarás un poco confundido, porque es un enfoque completamente distinto del estándar basado en code-behind. Por otro lado si ya llevas un tiempo usando MVVM, probablemente no seas capaz de empezar cualquier proyecto usando otro enfoque diferente a MVVM. Esta es la razón por lo que escribimos este post ¿qué es MVVM? ¿por qué está tan ampliamente usado en el desarrollo de aplicaciones universales UWP y, generalmente hablando, por cualquier tecnología basada en XAML? Esperamos que, al final de este viaje, encuentres las respuestas a todas esas preguntas y que puedas empezas a usar el patrón MVVM en tus aplicaciones sin miedo.
+summary: El patrón de diseño Model-View-ViewModel (de ahora en adelante, MVVM) es un tema de amor y odio cuando se trata del desarrollo de aplicaciones universales UWP. Si nunca lo has usado y lo intentas por primera vez, probablemente te encontrarás un poco confundido, porque es un enfoque completamente distinto del estándar basado en code-behind. Por otro lado si ya llevas un tiempo usando MVVM, probablemente no seas capaz de empezar cualquier proyecto usando otro enfoque diferente a MVVM. Esta es la razón por lo que escribimos este post ¿qué es MVVM? ¿por qué está tan ampliamente usado en el desarrollo de aplicaciones universales UWP y, generalmente hablando, por cualquier tecnología basada en XAML? Esperamos que, al final de este viaje, encuentres las respuestas a todas esas preguntas y que puedas empezas a usar el patrón MVVM en tus aplicaciones sin miedo.
 categories: tutoriales
 published: true
 ---
@@ -13,6 +13,8 @@ Lo primero que tienes que entender es que MVVM no es un *framework* o una librer
 
 El propósito del patrón es ayudar a los desarrolladores a definir la arquitectura de una aplicación. ¿Por qué es tan importante hacerlo? ¿Por qué no podemos simplemente continuar desarrollando una aplicación como siempre solemos hacerlo, que es escribiendo el todo código en una clase en el *code-behind*? El enfoque estándar es muy rápido y simple de entender pero tiene muchas limitaciones cuando se trata de proyectos más complejos, que necesitan mantenimiento en algún momento en el tiempo. La razón de esto es que la clase en el *code-behind* tiene una muy fuerte dependencia de la página XAML. Consecuentemente, la mayoría del código no puede aislarse y terminaríamos mezclando la lógica de negocio y la capa de presentación.
 
+**TABLA DE CONTENIDOS**
+* Tabla de contenidos
 {:toc}
 
 A la larga, el enfoque con code-behind introduce muchos problemas:
