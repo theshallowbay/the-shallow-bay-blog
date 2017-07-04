@@ -36,11 +36,17 @@ El nombre de este patrón viene del hecho de que un proyecto se puede divir en t
 ### El modelo
 El modelo es un componente de la aplicación que define y maneja todas las entidades básicas de la aplicación. El objetivo de esta capa es remover cualquier dependencia de la forma en que los datos son representados. Idealmente, deberías ser capaz de tomar las clases que pertenecen a éste componente y usarlas en otra aplicación sin hacerles ningún cambio. Por ejemplo, si estás trabajando en una [aplicación que maneja los pedidos y los clientes](https://theshallowbay.github.io/tutoriales/2017/06/20/dise%C3%B1o-de-bases-de-datos/#otro-ejemplo-una-tienda-web) de una compañía, el modelo puede definirse por todas las clases que definen las entidades base, como un cliente, un pedido, un producto, etc.
 
+![](http://img12.deviantart.net/2a19/i/2013/016/f/7/layered_database_source_documents_by_barrymieny-d5rnycs.jpg)
+
 ### La vista
 La vista es el lado opuesto del modelo y se representa por la interfaz de usuario. En el mundo de las aplicaciones universales, las vistas son páginas XAML, que contienen todos los controles y las animaciones que definen la parte visual de la aplicación. Reciclando la ya mencionada aplicación de ejemplo que maneja pedidos y clientes, podemos tener múltiples vistas para mostrar la lista de clientes, de los productos disponibles, los pedidos hechos por un cliente, etc.
 
+![](http://utekontakten-trondheim.no/wp-content/uploads/sites/29/2017/02/grafisk-design-app.jpg)
+
 ### El ViewModel
 El ViewModel es el punto de conexión entre la vista y el modelo: se encarga de obtener los datos en crudo del modelo y manipularlos de tal forma que se muestren de forma correcta por la vista. La gran diferencia con una clase en code-behind es que el ViewModel es solo una clase plana y simple, sin ninguna dependencia de la vista. En una aplicación basada en el patrón MVVM, típicamente se crea un ViewModel por cada vista.
+
+![](http://i.imgur.com/uD5pADO.png)
 
 ![](https://i.imgur.com/M5Ue5T6.png)
 
