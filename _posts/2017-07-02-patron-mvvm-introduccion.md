@@ -78,9 +78,9 @@ Con el patrón MVVM, en cambio, se conectan propiedades en el ViewModel con los 
 
     <ListView ItemsSource="{Binding Path=Orders}" />
 
-De esta forma, se ha roto la dependencia entre la interfaz de usuario y la lágica, porque la propiedad `Orders` puede definirse también en una clase simple y plana como un ViewModel.
+De esta forma, se ha roto la dependencia entre la interfaz de usuario y la lógica, porque la propiedad `Orders` puede definirse también en una clase simple y plana como un ViewModel.
 
-Como ya se mencionó, el binding puede también ser bidireccional: este enfoque se usa cuando no solamente el ViewModel necesita mostrar datos en la Vista, sino que también la Vista debe ser capaz de poder cambiar el valor de una de las propiedades del ViewModel. Digamos que tu aplicación tiene una página donde el usuario pueda crear un nuevo pedido y, consecuentemente, incluye un control `TextBox` donde especificar el nombre del producto. Esta información necesita ser manejada por el ViewModel, porque él se encargará de interactuar con el modelo y de agregar el pedido a la base de datos. En este caso, se aplica el atributo `Mode` del binding y se especifica como TwoWay, así cada vez que el usuario agregue texto al control TextBox, la propiedad conectada en el ViewModel obtendrá el valor escrito.
+Como ya se mencionó, el binding puede también ser bidireccional: este enfoque se usa cuando no solamente el ViewModel necesita mostrar datos en la Vista, sino que también la Vista debe ser capaz de poder cambiar el valor de una de las propiedades del ViewModel. Digamos que tu aplicación tiene una página donde el usuario pueda crear un nuevo pedido y, consecuentemente, incluye un control `TextBox` donde especificar el nombre del producto. Esta información necesita ser manejada por el ViewModel, porque él se encargará de interactuar con el modelo y de agregar el pedido a la base de datos. En este caso, se aplica el atributo `Mode` del binding y se especifica como `TwoWay`, así cada vez que el usuario agregue texto al control TextBox, la propiedad conectada en el ViewModel obtendrá el valor escrito.
 
 Si, por ejemplo, en XAML tenemos el siguiente código:
 
@@ -106,11 +106,11 @@ El núcleo de la implementación del patrón MVVM recae en su jerarquía: **la c
 La propiedad **DataContext** de la clase **Page** se ha conectado a una nueva instancia de la clase **MainViewModel**.
 
 ## La interfaz INotifyPropertyChanged
-Si intetamos crear una aplicación simple basada en el patrón MVVM aplicando los conceptos que hemos aprendido, rápidamente crearemos un gran problema. Usemos el ejemplo anterior de la página para crear un nuevo pedido y digamos que tenemos, en el ViewMode, una propiedad que usamos para mostrar el nombre del producto, como la siguiente:
+Si intetamos crear una aplicación simple basada en el patrón MVVM aplicando los conceptos que hemos aprendido, rápidamente crearemos un gran problema. Usemos el ejemplo anterior de la página para crear un nuevo pedido y digamos que tenemos, en el ViewModel, una propiedad que usamos para mostrar el nombre del producto, como la siguiente:
 
     public string NombreProducto { get; set; }
 
-De acuerdo a lo que hemos aprendido, espermos tener un control TextBlock en la página para mostrar el valor de esta propiedad, como sigue:
+De acuerdo a lo que hemos aprendido, esperamos tener un control *TextBlock* en la página para mostrar el valor de esta propiedad, como sigue:
 
     <TextBlock Text="{Binding Path=NombreProducto}" />
 
@@ -155,7 +155,7 @@ Sin embargo, con esta sintaxis no se puede cambiar qué pasa cuando el valor de 
 Ahora la propiedad trabajará como se esperaba: cuando cambia su valor, el control *TextBlock* en binding con ella cambiará su apariencia para mostrarla.
 
 ## Comandos (o cómo manejar eventos en MVVM)
-Otro escenario crítico cuando se trata de desarrollar una aplicación es manejar las interacciones con el usuario: él puede presionar un botón, escoger un ítem de una lista, etc. En XAML, esos escenearios se manejan usando eventos que son expuestos por varios controles. Por ejemplo, si quieres manejar cuando se presiona un botón, necesitamos suscribirnos  a un evento **Click**, como en el siguiente ejemplo:
+Otro escenario crítico cuando se trata de desarrollar una aplicación es manejar las interacciones con el usuario: él puede presionar un botón, escoger un ítem de una lista, etc. En XAML, esos escenarios se manejan usando eventos que son expuestos por varios controles. Por ejemplo, si quieres manejar cuando se presiona un botón, necesitamos suscribirnos  a un evento **Click**, como en el siguiente ejemplo:
 
     <Button Content="Haz clic aquí" Click="OnButtonClicked" />
 
@@ -168,7 +168,7 @@ El evento *Click* es administrado por un *event handler*, que es un método que 
 
 El problema con este enfoque es que los event handlers tienen una fuerte dependencia con la Vista: sólo pueden declararse, de hecho, en la clase del code-behind. Cuando se crea una aplicación usando el patrón MVVM, en cambio, todos los datos y la lógica son usualmente definidos en el ViewModel, así que es necesario encontrar una manera de manejar la interacción con el usuario desde allí.
 
-Para este propósito, XAML tiene los **commands**, que son una manera de expresar una interación del usuario con una propiedad en lugar de usar un event handler. Como es uns propiedad simple, se puede romper la fuerte conexión entre la Vista y el event handler y se puede también definir en una clase independiente, como un ViewModel.
+Para este propósito, XAML tiene los **commands**, que son una manera de expresar una interación del usuario con una propiedad en lugar de usar un event handler. Como es una propiedad simple, se puede romper la fuerte conexión entre la Vista y el event handler y se puede también definir en una clase independiente, como un ViewModel.
 
 El *framework* ofrece la interfaz **ICommand** para implementar comandos: con el enfoque estándar, se termina teniendo una clase separada para cada comando. El siguiente ejemplo muestra como luce un comando:
 
@@ -186,7 +186,7 @@ El *framework* ofrece la interfaz **ICommand** para implementar comandos: con el
 	    
 	}
 
-El núclero del comando es el método **Execute()**, que contiene el código que ha de ejecutarse cuando se invoca el comando (por ejemplo, porque el usuario ha presionado un botón). Es el código que, en una aplicación tradicional, se pudo haber escrito dentro de un event handler.
+El núcleo del comando es el método **Execute()**, que contiene el código que ha de ejecutarse cuando se invoca el comando (por ejemplo, porque el usuario ha presionado un botón). Es el código que, en una aplicación tradicional, se pudo haber escrito dentro de un event handler.
 
 El método **CanExecute()** es una de las características más interesantes que proveen los comandos, porque puede usarse para manejar el ciclo de vida del comando cuando la aplicación está ejecutándose. Por ejemplo, digamos que tenemos una página con un formulario que se puede llenar, con un botón al final de la página que el usuario presiona para enviar el formulario. Como todos los campos en el formularios son obligatorios, queremos que el botón esté desactivado hasta que todos los campos hayan sido llenados. Si manejamos la operación para enviar el formulario con un comando, podemos implementar el método *CanExecute()* de una forma que devuelva *false* cuando haya al menos un campo vacío. De esta forma, el control *Button* que hemos enlazado al comando automáticamente cambiará su estado visual: estará desactivado y el usuario inmediatamente entenderá que no podrá presionarlo.
 
