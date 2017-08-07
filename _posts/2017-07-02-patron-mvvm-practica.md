@@ -180,7 +180,7 @@ Esta clase nos da acceso a un método llamado **Set()**, que podemos usar cuando
 		}
 	}
 
-Este código es muy similar al que ya vimos anteriormente cuando [introdujimos el concepto](https://theshallowbay.github.io/tutoriales/2017/07/02/patron-mvvm-introduccion/#la-interfaz-inotifypropertychanged) de la interfaz *INotifyPropertyChanged*. La única diferencia es que, grcias al método *Set()*, podemos matar dos pájaros de un solo tiro: almacenamos el valor en la propiedad **Nombre** y despachamos una notificación al canal binding de que el valor ha cambiado.
+Este código es muy similar al que ya vimos anteriormente cuando [introdujimos el concepto](https://theshallowbay.github.io/tutoriales/2017/07/02/patron-mvvm-introduccion/#la-interfaz-inotifypropertychanged) de la interfaz *INotifyPropertyChanged*. La única diferencia es que, gracias al método *Set()*, podemos matar dos pájaros de un solo tiro: almacenamos el valor en la propiedad **Nombre** y despachamos una notificación al canal binding de que el valor ha cambiado.
 
 Ahora que sabemos cómo crear propiedades, creamos otra para guardar el mensaje que se mostrará al usuario después de que haya presionado el botón.
 
@@ -224,14 +224,14 @@ Anteriormente aprendimos que, en el patrón MVVM, se usan los *comandos* para ma
 		}
 	}
 
-Cuando se crea un nuev objeto *RelayCommand* se le tiene que pasar, como parámetro, una ***Action***, que define el código que se quiere ejecutar cuando el comando es invocado. El ejemplo anterior declara la *Action* usando un método anónimo. Eso significa que, en lugar de definir un nuevo método en la clase con un nombre específico, se define en el mismo lugar de la definición de la propiedad, sin asignarle un nombre.
+Cuando se crea un nuevo objeto *RelayCommand* se le tiene que pasar, como parámetro, una ***Action***, que define el código que se quiere ejecutar cuando el comando es invocado. El ejemplo anterior declara la *Action* usando un método anónimo. Eso significa que, en lugar de definir un nuevo método en la clase con un nombre específico, se define en el mismo lugar de la definición de la propiedad, sin asignarle un nombre.
 
 Cuando el comando es invocado, se usa la nueva característica de C# 6.0 para llevar a cabo la concatenación de cadenas y obtener el valor de la propiedad **Nombre** y agregarle el prefijo "Hola". El resultado es guardado en la propiedad **Mensaje**.
 
 ## Crear la Vista
-Ahora que el ViewModel está listo, podemos ir a crear la Vista. El paso anterior debería haberte ayudado a entender uno de los grandes beneficios del patrón MVVM: hemos sido capaces de definir el ViewModel para manejar la lógica y la interfacción del usuario sin escribir una sola línea de código en XAML. Con el enfoque de code-behind, eso habría sido imposible; por ejemplo, si hubierámos querido recuperar el nombre escrito en el *TextBox*, primero debíamos haber agregado el control a la página y asignado un nombre usando la propiedad *x:Name*, para haber podido acceder desde el code-behind. O si hubierámos querido definir el método a ejecutar cuando se presiona el botón, hubiera sido necesario agregar un control *Button* en la página y suscribirse al evento *Click*.
+Ahora que el ViewModel está listo, podemos ir a crear la Vista. El paso anterior debería haberte ayudado a entender uno de los grandes beneficios del patrón MVVM: hemos sido capaces de definir el ViewModel para manejar la lógica y la interacción del usuario sin escribir una sola línea de código en XAML. Con el enfoque de code-behind, eso habría sido imposible; por ejemplo, si hubierámos querido recuperar el nombre escrito en el *TextBox*, primero debíamos haber agregado el control a la página y asignado un nombre usando la propiedad *x:Name*, para haber podido acceder desde el code-behind. O si hubierámos querido definir el método a ejecutar cuando se presiona el botón, hubiera sido necesario agregar un control *Button* en la página y suscribirse al evento *Click*.
 
-Desde un punto de vista de interfaz de usuario, el XAML que necesitamos escribir para nuestra aplicación es más o menos el mismo hubierámos creado para una aplicación code-behind. La interfaz, de hecho, no tiene ninguna conexión con la lógica, así que la manera en que la diseñemos no va a cambiar cuando usemos el patrón MVVM. La principal diferencia es que, en una app MVVM, usaremos binding mucho más, porque es la forma en que conectamos los controles con las propiedades en la ViewModel.
+Desde un punto de vista de interfaz de usuario, el XAML que necesitamos escribir para nuestra aplicación es más o menos el mismo que hubierámos creado para una aplicación code-behind. La interfaz, de hecho, no tiene ninguna conexión con la lógica, así que la manera en que la diseñemos no va a cambiar cuando usemos el patrón MVVM. La principal diferencia es que, en una app MVVM, usaremos binding mucho más, porque es la forma en que conectamos los controles con las propiedades en la ViewModel.
 Así es como luce nuestra Vista:
 
     <Page x:Class="HolaMundo.Views.MainPage"

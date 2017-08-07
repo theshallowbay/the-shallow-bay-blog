@@ -130,6 +130,8 @@ En la página hemos agregado:
 1. Un control *ListView*, cuya propiedad *ItemsSource* está conectada, usando binding, a la propiedad **Noticias** del ViewModel. Cuando el ViewModel usa el método *ServicioRSS* para cargar dentro de la propiedad *Noticias* la lista de noticias, el control automáticamente actualizará su diseño visual para mostrarlas. Específicamente, hemos definido un *ItemTemplate* que muestra la fecha de publicación de la noticia y su título.
 2. Un *AppBarButton* en la barra de comandos de la aplicación, que está conectado a la propiedad **ComandoCargar**. Cuando se presiona el botón, el ViewModel descargará las noticias desde el feed RSS usando la clase *ServicioRSS*.
 
+![](http://i.imgur.com/z0Lhld5.gif)
+
 Ahora que tenemos nuestra aplicación de ejemplo lista y corriendo, podemos introducir algunos nuevos conceptos que nos ayudarán a hacerla mejor.
 
 ## Inyección de dependencias
