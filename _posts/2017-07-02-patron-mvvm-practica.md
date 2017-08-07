@@ -13,6 +13,8 @@ Continuemos en nuestro viaje para aprender el patrón MVVM, aplicado al desarrol
 * Tabla de contenidos
 {:toc}
 
+> NOTA: Este tutorial es una traducción propia de otro que se puede encontrar [aquí](http://blog.qmatteoq.com/the-mvvm-pattern-the-practice/). Si deseas, puedes ir allí y leerlo en inglés. Todo el crédito va para el autor original. La intención de escribirlo aquí en español se rige de acuerdo a nuestra conducta de compartir el conocimiento.
+
 ## El proyecto
 La meta del patrón MVVM es ayudar a los desarrolladores a organizar su código de una mejor manera. Como tal, el **primer paso** es definir la estructura del proyecto de una forma que, también desde un punto de vista lógico, se pueda seguir los principios del patrón. Consecuentemente, usualmente la primera cosa que se hace es crear un conjunto de carpetas donde ubicar nuestras clases y nuestros archivos, como:
 

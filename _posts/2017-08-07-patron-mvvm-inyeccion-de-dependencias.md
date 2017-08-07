@@ -9,6 +9,12 @@ published: true
 
 Hasta aquí, hemos aprendido los conceptos básicos del patrón MVVM y cómo aplicarlos en una aplicación real. Ahora veremos algunos conceptos más avanzados, que serán de mucha ayuda para implementar el patrón MVVM en proyectos reales y complejos
 
+**TABLA DE CONTENIDOS**
+* Tabla de contenidos
+{:toc}
+
+> NOTA: Este tutorial es una traducción propia de otro que se puede encontrar [aquí](http://blog.qmatteoq.com/the-mvvm-pattern-dependency-injection/). Si deseas, puedes ir allí y leerlo en inglés. Todo el crédito va para el autor original. La intención de escribirlo aquí en español se rige de acuerdo a nuestra conducta de compartir el conocimiento.
+
 ## Creemos un lector de noticias RSS
 Para entender qué es la inyección de dependencias, vamos a crear una aplicación que muestre al usuario una lista de noticias obtenidas de un [feed RSS](https://support.google.com/feedburner/answer/79408). Como ya mencionamos en la sección anterior, el primer paso es dividir la aplicación en tres diferentes componentes principales:
 
@@ -42,10 +48,10 @@ Ahora podemos crear el servicio que, aprovechando LINQ a XML (un poderoso lengua
             return (from item in xdoc.Descendants("item")
                     select new ItemFeed
                    {
-                       Titulo = (string)item.Element("titulo"),
-                       Descripcion = (string)item.Element("descripcion"),
-                       Enlace = (string)item.Element("enlace"),
-                       FechaPublicacion = DateTime.Parse((string)item.Element("fechaPub"))
+                       Titulo = (string)item.Element("title"),
+                       Descripcion = (string)item.Element("description"),
+                       Enlace = (string)item.Element("link"),
+                       FechaPublicacion = DateTime.Parse((string)item.Element("pubDate"))
                    }).ToList();
                       
         }
@@ -228,7 +234,7 @@ Hasta aquí, las cosas han sido un poco sencillas. Sin embargo, digamos que esta
 
 Entonces señoras y señores, presentamos el concepto de **inyección de dependencias**, que es una forma de manejar este escenario de una mejor manera. El problema que acabamos de describir radica del hecho que, en el enfoque anterior, la clase *ServicioRSS* (que podemos considerar como una dependencia del ViewModel, porque él no puede trabajar apropiadamente sin ella) fue creada en el tiempo de construcción. Con la inyección de dependencias, podemos cambiar este enfoque y empezar a resolver esas dependencias en tiempo de ejecución, que es cuando la aplicación se está ejecutando.
 
-Esto es posible gracias a una clase especial, llamada **container**, que podemos considerar como una caja: dentro de ella, vamos a registrar todos los ViewModels y todas las dependencias que requiere nuestra aplicación. Cuando la alicación se está ejecutando y necesitemos una nueva instancia de un ViewModel (simplemente porque el usuario está navegando a una nueva página), ya no la vamos crear manualmente, sino que le diremos al *container* que lo haga por nosotros. El container revisará si puede resolver todas las dependencias (lo que significa que todos los servicios usados por los ViewModels estén disponibles) y, si la respuesta es sí, devolverá una nueva instancia del ViewModel con todas sus dependencias ya resultas y listas para usar. Ténicamente hablando, decimos que las dependencias son "inyectadas" en el ViewModel: es por esto que esta ténica se llama *inyección de dependencias*.
+Esto es posible gracias a una clase especial, llamada **container**, que podemos considerar como una caja: dentro de ella, vamos a registrar todos los ViewModels y todas las dependencias que requiere nuestra aplicación. Cuando la alicación se está ejecutando y necesitemos una nueva instancia de un ViewModel (simplemente porque el usuario está navegando a una nueva página), ya no la vamos crear manualmente, sino que le diremos al *container* que lo haga por nosotros. El container revisará si puede resolver todas las dependencias (lo que significa que todos los servicios usados por los ViewModels estén disponibles) y, si la respuesta es sí, devolverá una nueva instancia del ViewModel con todas sus dependencias ya resueltas y listas para usar. Ténicamente hablando, decimos que las dependencias son "inyectadas" en el ViewModel: es por esto que esta ténica se llama *inyección de dependencias*.
 
 ¿Por qué este enfoque resuelve el problema anterior, que es evitar cambiar todos los ViewModels si necesitamos cambiar la implementación de un servicio? Porque la conexión entre el ViewModel y el servicio es manejada por el container, que es un única instancia que atraviesa toda la aplicación. Cada ViewModel no tendrá que crear manualmente una nueva instancia de la clase *ServicioRSS*, sino que irá automáticamente incluída en el constructor del ViewModel. Es trabajo del container crear una nueva instancia de la clase *ServicioRSS* y pasársela al ViewModel, de forma que la pueda usar. Cuando necesitemos reemplazar la clase *ServicioRSS* con *ServicioRSSFalso*, solo necesitaremos cambiar la clase registrada en el container y, automáticamente, todos los ViewModels empezarán a usar la nueva.
 
@@ -314,7 +320,7 @@ public class MainViewModel : ViewModelBase
 ```
 
 ### El ViewModelLocator
-El último paso y el más importante, el cual es crear el container y registrar todos los ViewModels con sus dependencias. Típicamente esta configuración se hace cuando la aplicación se lanza, así que, cuando usamos MVVM Light y el enfoque con ViewModelLocator, el mejor lugar para hacerlo en el ViewModelLocator mismo, porque es la clase que se ocupa de despachar todos los ViewModels.
+El último paso y el más importante, el cual es crear el container y registrar todos los ViewModels con sus dependencias. Típicamente esta configuración se hace cuando la aplicación se lanza, así que, cuando usamos MVVM Light y el enfoque con ViewModelLocator, el mejor lugar para hacerlo es en el ViewModelLocator mismo, porque es la clase que se ocupa de despachar todos los ViewModels.
 
 Así es como nuestra nueva implementación del ViewModelLocator luce:
 
@@ -339,7 +345,7 @@ public class ViewModelLocator
     }
 ```
 
-Lo primero es, que necesitamos resaltar que este código es solamente un ejemplo: hay muchas librerías disponibles para implementar el enfoque de inyección de dependencias, como Ninject o LightInject. Sin embargo, la mayoría de los toolkits y frameworks MVVM proveen también una infraestructura para manejar estos escenarios y MVVM Light no es la excepción, al proveer un container simple identificado por la clase **SimpleIoc**, que es es configurada como container por defecto por la aplicación al usar el método *SetLocationProvider()* de la clase **ServiceLocator**.
+Lo primero es, que necesitamos resaltar que este código es solamente un ejemplo: hay muchas librerías disponibles para implementar el enfoque de inyección de dependencias, como Ninject o LightInject. Sin embargo, la mayoría de los toolkits y frameworks MVVM proveen también una infraestructura para manejar estos escenarios y MVVM Light no es la excepción, al proveer un container simple identificado por la clase **SimpleIoc**, que es configurada como container por defecto por la aplicación al usar el método *SetLocationProvider()* de la clase **ServiceLocator**.
 
 El siguiente paso es registrar todos los ViewModels y sus dependencias en el container. La clase *SimpleIoc* ofrece el método *Register()* para lograr esto, que puede hacerse de dos maneras:
 
@@ -350,11 +356,11 @@ Al final, necesitamos cambiar la forma como la clase *ViewModelLocator* define l
 
 Después de haber terminado esos cambios, esto es lo que pasará cuando lancemos nuestra aplicación de nuevo:
 
-1. La aplicación creará una nueva instancia de la clase *ViewModelLocator*, que iniciará la configuración del container. La clase *SimpleIoc* registrará las clases *MainViewMode* y *ServicioRSS* (la segunda, descrita por la interfaz `IServicioRSS`).
+1. La aplicación creará una nueva instancia de la clase *ViewModelLocator*, que iniciará la configuración del container. La clase *SimpleIoc* registrará las clases *MainViewModel* y *ServicioRSS* (la segunda, descrita por la interfaz `IServicioRSS`).
 2. La aplicación disparará la navegación a la página principal de la aplicación. Consecuentemente, como la propiedad `DataContext` de la *Page* está conectada a la propiedad `Main` del *ViewModelLocator*, el locator intentará crear una nueva instancia del ViewModel.
 3. El container definido en la clase *ViewModelLocator* comprobará si hay una clase registrada cuyo tipo sea *MainViewModel*. La respuesta es sí, sin embargo la clase depende de una clase que implementa la interfaz *IServicioRSS*. Consecuentemente, el container empezará otra búsqueda y comprobará si hay una clase conectada a la interfaz registrada *IServicioRSS*. También en este caso la respuesta es sí: el container devolverá una nueva instancia de la clase *MainViewModel* con la implementación *ServicioRSS* lista para ser usada.
 
-Si alguna de las condiciones previas no se satisfacen (por ejemplo, el container no encuentra una clase registrada para la interfaz *IServicioRSS*), obtendremos una excepción, porque el container no pudo resolver todas las dependencias. Ahora que hemos alcanzado el fin de nuestro viaje, debes ser capaz de entender porqué la inyección de dependencias es extemadamente útil para nuestro escenario. Tan pronto como hagamos algunas pruebas y queramos usar la clase *ServicioRSSFalso* en reemplazo de *ServicioRSS*, solo necesitaríamos cambiar una línea de código en la clase *ViewModelLocator. En lugar de:
+Si alguna de las condiciones previas no se satisfacen (por ejemplo, el container no encuentra una clase registrada para la interfaz *IServicioRSS*), obtendremos una excepción, porque el container no pudo resolver todas las dependencias. Ahora que hemos alcanzado el fin de nuestro viaje, debes ser capaz de entender porqué la inyección de dependencias es extemadamente útil para nuestro escenario. Tan pronto como hagamos algunas pruebas y queramos usar la clase *ServicioRSSFalso* en reemplazo de *ServicioRSS*, solo necesitaríamos cambiar una línea de código en la clase *ViewModelLocator*. En lugar de:
 
     SimpleIoc.Default.Register<IServicioRSS, ServicioRSS>();
 
