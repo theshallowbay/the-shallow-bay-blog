@@ -1,5 +1,12 @@
+---
+layout: post
+date: 2017-08-07 11:54:00
+summary: Hasta aquí, hemos aprendido los conceptos básicos del patrón MVVM y cómo aplicarlos en una aplicación real. Ahora veremos algunos conceptos más avanzados, que serán de mucha ayuda para implementar el patrón MVVM en proyectos reales y complejos
+title: El patrón MVVM - Inyección de dependencias
+categories: tutoriales
+published: true
+---
 
-# Inyección de dependencias
 Hasta aquí, hemos aprendido los conceptos básicos del patrón MVVM y cómo aplicarlos en una aplicación real. Ahora veremos algunos conceptos más avanzados, que serán de mucha ayuda para implementar el patrón MVVM en proyectos reales y complejos
 
 ## Creemos un lector de noticias RSS
@@ -7,9 +14,9 @@ Para entender qué es la inyección de dependencias, vamos a crear una aplicaci�
 
 - El **modelo**, que es la entidad base que identifica una noticia del feed.
 - La **Vista**, que es la página XAML que mostrará las noticias usando un control *ListView*
-- El ViewMode, que se encargará de obtener las noticias del feed RSS y de pasarselos a la Vista
+- El **ViewModel**, que se encargará de obtener las noticias del feed RSS y de pasarselos a la Vista
 
-Como la meta del patrón MVVM es separar, tanto como sea posible, las tres diferentes capas de la aplicación, es una buena práctica evitar incluir la lógica requerida para [*parsear*](https://groups.google.com/forum/#!topic/phplatinoamerica/nBe6PQm-VVY)(analizar sintacticamente) el feed RSS directamente en el ViewModel. Una mejor solución es dejar manejar esta tarea a una clase específica (la llamaremos `ServicioRSS`), que se encargará de descargar el XML del feed RSS, convertirlo en una colección de objetos y devolvérselos al ViewModel.
+Como la meta del patrón MVVM es separar, tanto como sea posible, las tres diferentes capas de la aplicación, es una buena práctica evitar incluir la lógica requerida para [*parsear*](https://groups.google.com/forum/#!topic/phplatinoamerica/nBe6PQm-VVY) (analizar sintácticamente) el feed RSS directamente en el ViewModel. Una mejor solución es dejar manejar esta tarea a una clase específica (la llamaremos `ServicioRSS`), que se encargará de descargar el XML del feed RSS, convertirlo en una colección de objetos y devolvérselos al ViewModel.
 
 Empecemos con el modelo y la defición de una clase, llamada **ItemFeed**, que identifica a un único elemento del feed:
 
@@ -67,7 +74,7 @@ Ahora tenemos una clase que acepta la URL de un feed RSS de entrada y devuelve u
 					_comandoCargar = new RelayCommand(async () =>
 					{
 						ServicioRSS servicioRss = new ServicioRSS();
-						List<ItemFeed> items = await servicioRss.ObtenerNoticias("http://theshallowbay.github.io/feed.xml");
+						List<ItemFeed> items = await servicioRss.ObtenerNoticias("https://theshallowbay.github.io/feed.xml");
 						Noticias = items;
 					});
 				}
@@ -362,10 +369,10 @@ Estamos alcanzando el final de nuestro viaje de aprendimiento. En el próximo po
 
 Happy coding!
 
-
-# Escenarios avanzados
-
-# Servicios, helpers y plantillas
-
-# Datos en tiempo de diseño
-
+**El patrón MVVM: Series**
+1. Introducción
+2. La práctica
+3. Inyección de dependencias
+4. Escenarios avanzados
+5. Servicios, helpers y plantillas
+6. Datos en tiempo de diseño
