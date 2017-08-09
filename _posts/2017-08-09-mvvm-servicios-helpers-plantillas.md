@@ -1,4 +1,19 @@
-En este post vamos a introducir algunos conceptos y librerías que pueden hacer nuestra vida más fácil cuando estemos desarrollando aplicaciones universales UWP usando el patrón MVVM
+---
+layout: post
+date: 2017-08-19 17:09:00
+summary: En este post vamos a introducir algunos conceptos y librerías que pueden hacer nuestra vida más fácil cuando estemos desarrollando aplicaciones universales UWP usando el patrón MVVM
+title: El patrón MVVM - Servicios, helpers y plantillas
+categories: tutoriales
+published: true
+---
+
+En este post vamos a introducir algunos conceptos y librerías que pueden hacer nuestra vida más fácil cuando estemos desarrollando aplicaciones universales UWP usando el patrón MVVM.
+
+**TABLA DE CONTENIDOS**
+* Tabla de contenidos
+{:toc}
+
+> NOTA: Este tutorial es una traducción propia de otro que se puede encontrar [aquí](http://blog.qmatteoq.com/the-mvvm-pattern-services-helpers-and-templates/). Si deseas, puedes ir allí y leerlo en inglés. Todo el crédito va para el autor original. La intención de escribirlo aquí en español se rige de acuerdo a nuestra conducta de compartir el conocimiento.
 
 ## Servicios, servicios, servicios
 En [uno](https://theshallowbay.github.io/tutoriales/2017/08/07/patron-mvvm-inyeccion-de-dependencias/#creemos-un-lector-de-noticias-rss) de los posts anteriores creamos una aplicación de ejemplo que mostraba una lista de noticias obtenidas de un feed RSS. Mientras estuvimos desarrollando esa aplicación introdujimos el concepto de *servicio*: una clase que se encarga de llevar a cabo operaciones y pasar los resultados al ViewModel. Los servicios pueden ser útiles también para alcanzar otra meta importante en el uso del patrón MVVM: evitar escribir código específico de plataforma directamente en los ViewModel, para hacer más fácil después compartirlo con otras aplicaciones o plataformas. Como es usual, vamos a explicar los conceptos con ejemplos reles, así que empecemos con uno nuevo,
