@@ -159,7 +159,13 @@ Template10 es una nueva plantilla, específica para el desarrollo de aplicacione
 
 Happy coding!
 
-
+**El patrón MVVM: Series**
+1. [Introducción](https://theshallowbay.github.io/tutoriales/2017/07/02/patron-mvvm-introduccion/)
+2. [La práctica](https://theshallowbay.github.io/tutoriales/2017/07/04/patron-mvvm-practica/)
+3. [Inyección de dependencias](https://theshallowbay.github.io/tutoriales/2017/08/07/patron-mvvm-inyeccion-de-dependencias/)
+4. [Escenarios avanzados](https://theshallowbay.github.io/tutoriales/2017/08/08/mvvm-escenarios-avanzados/)
+5. [Servicios, helpers y plantillas](https://theshallowbay.github.io/2017/08/09/mvvm-servicios-helpers-plantillas/)
+6. [Datos en tiempo de diseño](https://theshallowbay.github.io/tutoriales/2017/08/09/datos-tiempo-diseno/)
 
 
 
