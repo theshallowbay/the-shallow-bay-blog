@@ -1,6 +1,6 @@
 ---
 layout: post
-date: 2017-08-19 17:09:00
+date: 2017-08-09 17:09:00
 summary: En este post vamos a introducir algunos conceptos y librerías que pueden hacer nuestra vida más fácil cuando estemos desarrollando aplicaciones universales UWP usando el patrón MVVM
 title: El patrón MVVM - Servicios, helpers y plantillas
 categories: tutoriales
@@ -59,6 +59,7 @@ Esta interfaz será implementada por una clase real, que será diferente en cada
 
 En Xamarin.Android, en cambio, necesitaremos usar la clase `AlertDialog`, que es específica para Android:
 
+```
 public async Task MostrarDialogoAsync(string mensaje)
 {
     AlertDialog.Builder alerta = new AlertDialog.Builder(Application.Context);
@@ -77,6 +78,9 @@ public async Task MostrarDialogoAsync(string mensaje)
     alerta.Show();
     await Task.Yield();
 }
+```
+
+
 
 Ahora que hemos movido las APIs específicas de plataforma en un servicio, podemos usar la inyección de dependencias (que ya hemos descrito antes), para usar, en el ViewModel, la interfaz en lugar de la clase real. De esta manera, nuestro comando solamente describirá la operación que debe llevar a cabo, delegando a la clase `DialogService` a que efectivamente ejecute el código. Con este nuevo enfoque, el ViewModel añadirá una dependencia a la clase `IDialogoServicio` en el constructor, como en el siguiente ejemplo:
 
