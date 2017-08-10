@@ -55,6 +55,7 @@ Entonces, la interfaz es implementada por dos clases: una llamada *ServicioRSS*,
                       
         }
     }
+    
     public class ServicioRSSFalso : IServicioRSS
     {
         public Task<List<ItemFeed>> ObtenerNoticias(string url)
