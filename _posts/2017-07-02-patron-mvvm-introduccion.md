@@ -68,13 +68,13 @@ Digamos, por ejemplo, que tenemos una página en una aplicación que muestra una
 
 {% highlight c# %}
     public List<Order> Orders { get; set; }
-{% endhighlight%}
+{% endhighlight %}
 
 Para mostrar la colección en una aplicación tradicional con code-behind, en el mismo punto, se asignaría esta propiedad manualmente a la propiedad `ItemsSource` de un control como un `ListView` o un `GridView`, como en el siguiente ejemplo:
 
 {% highlight c# %}
     MyList.ItemsSource = Orders;
-{% endhighlight%}
+{% endhighlight %}
 
 Sin embargo, este código crea una fuerte dependencia entre la lógica y la interfaz: como estamos accediendo a la propiedad ItemsSource usando el nombre del control, sólo podemos llevar a cabo esta operación en la clase del code behind.
 
@@ -82,7 +82,7 @@ Con el patrón MVVM, en cambio, se conectan propiedades en el ViewModel con los 
 
 {% highlight xaml %}
     <ListView ItemsSource="{Binding Path=Orders}" />
-{% endhighlight%}
+{% endhighlight %}
 
 De esta forma, se ha roto la dependencia entre la interfaz de usuario y la lógica, porque la propiedad `Orders` puede definirse también en una clase simple y plana como un ViewModel.
 
@@ -90,8 +90,9 @@ Como ya se mencionó, el binding puede también ser bidireccional: este enfoque 
 
 Si, por ejemplo, en XAML tenemos el siguiente código:
 
-{% highlight c# %}
+{% highlight xaml %}
     <TextBox Text="{Binding Path=ProductName, Mode=TwoWay}" />
+{% endhighlight %}
 
 significa que en el ViewModel tendremos una propiedad llamada `ProductName`, que guardará el texto escrito por el usuario en el TextBox.
 
@@ -110,7 +111,7 @@ El núcleo de la implementación del patrón MVVM recae en su jerarquía: **la c
 		  <!-- El contenido de la página va aquí -->
 		  
 	</Page>
-{% endhighlight%}
+{% endhighlight %}
 
 La propiedad **DataContext** de la clase **Page** se ha conectado a una nueva instancia de la clase **MainViewModel**.
 
@@ -119,13 +120,13 @@ Si intetamos crear una aplicación simple basada en el patrón MVVM aplicando lo
 
 {% highlight c# %}
     public string NombreProducto { get; set; }
-{% endhighlight%}
+{% endhighlight %}
 
 De acuerdo a lo que hemos aprendido, esperamos tener un control *TextBlock* en la página para mostrar el valor de esta propiedad, como sigue:
 
 {% highlight xaml %}
     <TextBlock Text="{Binding Path=NombreProducto}" />
-{% endhighlight%}
+{% endhighlight %}
 
 Ahora digamos que, durante la ejecución de la aplicación, el valor de la propiedad **NombreProducto** cambia (por ejemplo, porque se termina una operación de cargado de datos). Notaremos como, a pesar del hecho de que el ViewModel guardará apropiadamente el nuevo valor de la propiedad, el control TextBlock seguirá mostrando la antigüa. La razón de esto es que el binding no es suficiente para manejar la conexión entre la Vista y el ViewModel.
 
@@ -147,14 +148,14 @@ Así es como se ve un ViewModel que implementa esta interfaz:
 		    PropiedadHaCambiado?.Invoke(this, new PropertyChangedEventArgs(nombrePropiedad));
 		}
 	}
-{% endhighlight%}
+{% endhighlight %}
 
 Puedes notar cómo la implementación de esta interfaz permite llamar a un método llamado **OnPropertyChanged()**, que podemos invocar cada vez que el valor de una propiedad cambia.
 Sin embargo, para lograr esto, necesitamos cambiar la manera como definimos las propiedades dentro de nuestro ViewModel. Cuando se trata de propiedades simples, usualmente se definen usando sintaxis corta:
 
 {% highlight c# %}
     public string NombreProducto { get; set; }
-{% endhighlight%}
+{% endhighlight %}
 
 Sin embargo, con esta sintaxis no se puede cambiar qué pasa cuando el valor de la propiedad es leído o escrito. Por tal motivo, es necesario ir atrás y usar el enfoque anterior, basado en una variable privada que guarde temporalmente el valor de la propiedad. De esta forma, cuando se escribe el valor, se puede invocar el método **OnPropertyChanged()** y despachar y enviar la notificación. Así es como una propiedad en un ViewModel se ve:
 
@@ -169,7 +170,7 @@ Sin embargo, con esta sintaxis no se puede cambiar qué pasa cuando el valor de 
 		    OnPropertyChanged();
 		}
 	}
-{% endhighlight%}
+{% endhighlight %}
 
 Ahora la propiedad trabajará como se esperaba: cuando cambia su valor, el control *TextBlock* en binding con ella cambiará su apariencia para mostrarla.
 
@@ -178,7 +179,7 @@ Otro escenario crítico cuando se trata de desarrollar una aplicación es maneja
 
 {% highlight xaml %}
     <Button Content="Haz clic aquí" Click="OnButtonClicked" />
-{% endhighlight%}
+{% endhighlight %}
 
 El evento *Click* es administrado por un *event handler*, que es un método que incluye, entre varios parámetros, alguna información que es útil para entender el contexto del evento (por ejemplo, qué control acciona el evento o qué elemento de la lista ha sido seleccionado), como en el siguiente ejemplo:
 
@@ -187,7 +188,7 @@ El evento *Click* es administrado por un *event handler*, que es un método que 
     {
 	    // Hacer algo
 	}
-{% endhighlight%}
+{% endhighlight %}
 
 El problema con este enfoque es que los event handlers tienen una fuerte dependencia con la Vista: sólo pueden declararse, de hecho, en la clase del code-behind. Cuando se crea una aplicación usando el patrón MVVM, en cambio, todos los datos y la lógica son usualmente definidos en el ViewModel, así que es necesario encontrar una manera de manejar la interacción con el usuario desde allí.
 
@@ -209,7 +210,7 @@ El *framework* ofrece la interfaz **ICommand** para implementar comandos: con el
 	    public event EventHandler CanExecuteChanged;
 	    
 	}
-{% endhighlight%}
+{% endhighlight %}
 
 El núcleo del comando es el método **Execute()**, que contiene el código que ha de ejecutarse cuando se invoca el comando (por ejemplo, porque el usuario ha presionado un botón). Es el código que, en una aplicación tradicional, se pudo haber escrito dentro de un event handler.
 
@@ -223,7 +224,7 @@ Una vez hemos definido un comando, podemos enlazarlo al XAML gracias a la propie
 
 {% highlight xaml %}
     <Button Content="Haz click aquí" Command="{Binding Path=ClickCommand}" />
-{% endhighlight%}
+{% endhighlight %}
 
 Como veremos más adelante, la mayoría de los *toolkits* y de *frameworks* que implementan el patrón MVVM ofrecen una manera fácil de definir un comando, sin forzar al desarrollador a crear una nueva clase por cada comando que tenga la aplicación. Por ejemplo, el toolkit popular MVVM Light ofrece una clase llamada **RelayCommand**, que puede usarse para definir un comando de la siguiente forma:
 
@@ -244,7 +245,7 @@ Como veremos más adelante, la mayoría de los *toolkits* y de *frameworks* que 
 			return _diHola;
 		}
 	}
-{% endhighlight%}
+{% endhighlight %}
 
 Como se puede ver, no es necesario definir una nueva clase por cada comando sino que, al usar método anónimos, se puede simplemente crear un nuevo objeto **RelayCommand** y pasarle, como parámetros:
 
@@ -284,7 +285,7 @@ Prism es un framework que usa un enfoque similar al que ofrece Caliburn Micro: o
 
 Se puede decir que se sitúa en medio de MVVM Light y Caliburn Micro, cuando se trata de complejidad: no es tan simple y flexible como MVVM Light, pero, al mismo tiempo, no usa la conveción de nombres de forma agresiva como lo hace Calibun Micro.
 
-## Qué viene después
+**Qué viene después**
 En los próximos posts vamos a convertir lo que hemos aprendido en un proyecto real y vamos a utilizar MVVM Ligth para este propósito: la razón de esto es que, como ya hemos mencionado, creemos que es más fácil de entender, especialmente si eres nuevo en el patrón, porque ayuda a entender todos los conceptos básicos que son parte del núcleo del patrón.
 
 Happy coding!
