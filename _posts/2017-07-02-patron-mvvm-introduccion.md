@@ -80,7 +80,7 @@ Sin embargo, este código crea una fuerte dependencia entre la lógica y la inte
 
 Con el patrón MVVM, en cambio, se conectan propiedades en el ViewModel con los controles en la interfaz usando binding, como en el siguiente ejemplo:
 
-{% highlight xaml %}
+{% highlight xml %}
     <ListView ItemsSource="{Binding Path=Orders}" />
 {% endhighlight %}
 
@@ -90,7 +90,7 @@ Como ya se mencionó, el binding puede también ser bidireccional: este enfoque 
 
 Si, por ejemplo, en XAML tenemos el siguiente código:
 
-{% highlight xaml %}
+{% highlight xml %}
     <TextBox Text="{Binding Path=ProductName, Mode=TwoWay}" />
 {% endhighlight %}
 
@@ -101,7 +101,7 @@ En la sección inmediatamente anterior vimos cómo, gracias al binding, podemos 
 
 El núcleo de la implementación del patrón MVVM recae en su jerarquía: **la clase que se crea como el ViewModel de una Vista se define como el DataContext de la página entera**. Consecuentemente, cada control que coloquemos en la página XAML podrá acceder a las propiedades del ViewModel y mostrarlas o administrar la información. En una aplicación desarrollada con el patrón MVVM, usualmente, se termina con una declaración en la página como esta:
 
-{% highlight xaml %}
+{% highlight xml %}
     <Page x:Class="Ejemplo.MainPage"
 		  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		  xlmns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -177,7 +177,7 @@ Ahora la propiedad trabajará como se esperaba: cuando cambia su valor, el contr
 ## Comandos (o cómo manejar eventos en MVVM)
 Otro escenario crítico cuando se trata de desarrollar una aplicación es manejar las interacciones con el usuario: él puede presionar un botón, escoger un ítem de una lista, etc. En XAML, esos escenarios se manejan usando eventos que son expuestos por varios controles. Por ejemplo, si quieres manejar cuando se presiona un botón, necesitamos suscribirnos  a un evento **Click**, como en el siguiente ejemplo:
 
-{% highlight xaml %}
+{% highlight xml %}
     <Button Content="Haz clic aquí" Click="OnButtonClicked" />
 {% endhighlight %}
 
