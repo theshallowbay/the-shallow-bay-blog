@@ -26,7 +26,7 @@ Sin embargo, comparado al ejemplo que vimos en el post anterior de inyección de
 
 Veamos en detalle los cambios que tenemos que hacer. Vamos a usar el mismo ejemplo que vimos en el post de inyección de dependencias. La aplicación es sencilla: muestra una lista de noticias, obtenida de un feed RSS. En ese post anterior implementamos una interfaz, llamada `IServicioRss`, que ofrece un método con la siguiente firma:
 
-{% highlight csharp %}
+{% highlight c# %}
     public interface IRssService
     {
         Task<List<FeedItem>> ObtenerNoticias(string url);
