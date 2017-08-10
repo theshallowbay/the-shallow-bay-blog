@@ -192,4 +192,4 @@ Este ha sido el fin de nuestro viaje. Si has llegado hasta acá te felicitamos, 
 3. [Inyección de dependencias](https://theshallowbay.github.io/tutoriales/2017/08/07/patron-mvvm-inyeccion-de-dependencias/)
 4. [Escenarios avanzados](https://theshallowbay.github.io/tutoriales/2017/08/08/patron-mvvm-escenarios-avanzados/)
 5. [Servicios, helpers y plantillas](https://theshallowbay.github.io/2017/08/09/patron-mvvm-servicios-helpers-plantillas/)
-6. [Datos en tiempo de diseño](https://theshallowbay.github.io/tutoriales/2017/08/09/patron-datos-tiempo-diseno/)
+6. [Datos en tiempo de diseño](https://theshallowbay.github.io/tutoriales/2017/08/09/patron-mvvm-datos-tiempo-diseno/)
