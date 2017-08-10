@@ -81,7 +81,7 @@ text:
     hackernews:   'Share on Hacker News'
   post:
     updated:        'Al día'
-    minute_read:    'minutos leídos'
+    minute_read:    'minutos para leer'
     related_posts:  'Publicaciones relacionadas'
   index:
     coming_soon: 'Coming soon...'
