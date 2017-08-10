@@ -80,7 +80,7 @@ Sin embargo, este código crea una fuerte dependencia entre la lógica y la inte
 
 Con el patrón MVVM, en cambio, se conectan propiedades en el ViewModel con los controles en la interfaz usando binding, como en el siguiente ejemplo:
 
-{% highlight xml %}
+{% highlight html %}
     <ListView ItemsSource="{Binding Path=Orders}" />
 {% endhighlight %}
 
@@ -90,7 +90,7 @@ Como ya se mencionó, el binding puede también ser bidireccional: este enfoque 
 
 Si, por ejemplo, en XAML tenemos el siguiente código:
 
-{% highlight xml %}
+{% highlight html %}
     <TextBox Text="{Binding Path=ProductName, Mode=TwoWay}" />
 {% endhighlight %}
 
@@ -101,7 +101,7 @@ En la sección inmediatamente anterior vimos cómo, gracias al binding, podemos 
 
 El núcleo de la implementación del patrón MVVM recae en su jerarquía: **la clase que se crea como el ViewModel de una Vista se define como el DataContext de la página entera**. Consecuentemente, cada control que coloquemos en la página XAML podrá acceder a las propiedades del ViewModel y mostrarlas o administrar la información. En una aplicación desarrollada con el patrón MVVM, usualmente, se termina con una declaración en la página como esta:
 
-{% highlight xml %}
+{% highlight html %}
     <Page x:Class="Ejemplo.MainPage"
 		  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		  xlmns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -124,7 +124,7 @@ Si intetamos crear una aplicación simple basada en el patrón MVVM aplicando lo
 
 De acuerdo a lo que hemos aprendido, esperamos tener un control *TextBlock* en la página para mostrar el valor de esta propiedad, como sigue:
 
-{% highlight xaml %}
+{% highlight html %}
     <TextBlock Text="{Binding Path=NombreProducto}" />
 {% endhighlight %}
 
@@ -222,7 +222,7 @@ Al final, el comando ofrece un evento llamado **CanExecuteChanged**, que podemos
 
 Una vez hemos definido un comando, podemos enlazarlo al XAML gracias a la propiedad **Command**, que es expuesta por cada control capaz de manejar interacciones con el usuario (como Button, RadioButton, etc.)
 
-{% highlight xaml %}
+{% highlight html %}
     <Button Content="Haz click aquí" Command="{Binding Path=ClickCommand}" />
 {% endhighlight %}
 

@@ -60,11 +60,15 @@ Empecemos agregando los componentes: creemos una carpeta de **Views** y agreguem
 
 **NOTA IMPORTANTE:** Si eliminamos la Vista que crea Visual Studio por defecto, y luego ponemos otra en la carpeta de *Views* le debemos específicar cuál va a ser la página que será el punto de partida cuando se incie la aplicación. Para hacer esto, ubicamos en el *Explorador de soluciones* la clase *App.xaml.cs* (sí, hace parte del code-behind de la página App.xaml, pero estrictamente hablando  App.xaml no es una vista en sí misma), luego al inicio de la clase debemos escribir dónde tenemos nuestra Vista a usar:
 
+{% highlight c# %}
     using HolaMundo.Views
+{% endhighlight %}
 
 Después, aproximadamente sobre la línea 70, escribimos el nombre de nuestra página como argumento del método `Navigate` como ejemplo:
 
+{% highlight c# %}
     rootFrame.Navigate(typeof(MainPage), e.Arguments);
+{% endhighlight %}
 
 Ahora creemos el **ViewModel** que se conectará a esta página. Como explicamos anteriormente, el ViewModel es sólo una clase simple: crea la carpeta *ViewModels*, click derecho sobre ella y escoge **Agregar -> Nuevo elemento -> Clase.**
 
@@ -78,6 +82,7 @@ Ahora necesitamos conectar la Vista con el ViewModel, usando la propiedad del Da
 
 Digamos que hemos creado un ViewModel llamado MainViewModel. Podemos declararlo como un recurso global en el archivo App.xaml de esta forma:
 
+{% highlight html %}
     <Application x:Class="HolaMundo.App"
 				 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 				 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -89,6 +94,7 @@ Digamos que hemos creado un ViewModel llamado MainViewModel. Podemos declararlo 
 		</Aplication.Resources>
 		
 	</Application>
+{% endhighlight %}
 
 El primer paso es declarar, como un atributo de la clase Aplicación, el espacio de nombres (*namespace*) que contiene al ViewModel (en este ejemplo es *HolaMudo.ViewModels*) en la línea `xmlns:viewModel="using:HolaMundo.ViewModels"`. Luego en la colección Resources de la clase Application, se declara un nuevo recurso cuyo tipo es *ManViewModel* y se asocia a una llave (*key*) con el mismo nombre. 
 
@@ -98,6 +104,7 @@ En caso de que Visual Studio marque un error subrayado en azul, diciendo que *Ma
 
 Ahora se puede usar esta key y la palabra clave **StaticResource** para conectar el *DataContext* de la página al recurso, como en el siguiente ejemplo:
 
+{% highlight xaml %}
     <Page x:Class="HolaMundo.Views.MainPage"
 		  DataContext="{Binding Source={StaticResource MainViewModel}}"
 		  mc:Ignorable="d">
@@ -105,6 +112,7 @@ Ahora se puede usar esta key y la palabra clave **StaticResource** para conectar
 		  <!-- El contenido de la página va aquí -->
 	
 	</Page>
+{% endhighlight %}
 
 ### El enfoque del ViewModelLocator
 
@@ -112,6 +120,7 @@ Otro enfoque usado frecuentemente es utilizar una clase llamada **ViewModelLocat
 
 Esta es una definición de ejemplo de una clase *ViewModelLocator*:
 
+{% highlight c# %}
     public class ViewModelLocator
     {
 	    public ViewModelLocator()
@@ -126,9 +135,11 @@ Esta es una definición de ejemplo de una clase *ViewModelLocator*:
 			}
 		}
 	}
+{% endhighlight %}
 
 O, como alternativa, se puede simplificar el código usando una de las características nuevas en C# 6.0:
 
+{% highlight c# %}
     public class ViewModelLocator
     {
 	    public ViewModelLocator()
@@ -137,9 +148,11 @@ O, como alternativa, se puede simplificar el código usando una de las caracter�
 	    
 	    public MainViewModel Main => new MainViewModel();
 	}
+{% endhighlight %}
 
 Después de haber agregado la clase *ViewModelLocator* como un recurso global, se podrá usar para conectar la propiedad **Main** a la propiedad *DataContext* de la página, como en el siguiente ejemplo:
 
+{% highlight xaml %}
     <Page x:Class="HolaMundo.Views.MainPage"
 	      DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
 	      mc:Ignorable="d">
@@ -147,6 +160,7 @@ Después de haber agregado la clase *ViewModelLocator* como un recurso global, s
 	      <!-- El contenido de la página va aquí -->
 	      
 	</Page>
+{% endhighlight %}
 
 La sintaxis es muy similar a la que ya vimos en el primer enfoque, la principal diferencia es que, como la clase *ViewModelLocator* puede exponer múltiples propiedades, y se necesita especificar con el atributo **Path** cuál se quiere usar.
 
@@ -159,15 +173,18 @@ Empecemos a poblar el ViewModel y a definir las propiedades que necesitamos para
 
 Para hacer más fácil la implementación de esta interfaz, MVVM Light ofrece una clase base de la cual podemos heredar a nuestros ViewModels, como en el siguiente ejemplo:
 
+{% highlight c# %}
     using GalaSoft.MvvmLight;
     
     public class MainViewModel : ViewModelBase
     {
     
     }
+{% endhighlight %}
 
 Esta clase nos da acceso a un método llamado **Set()**, que podemos usar cuando definimos propiedades para despachar las notificaciones a la interfaz de usuario cuando el valor cambie. Veamos un ejemplo relacionado a nuestro escenario. Nuestro ViewModel tiene que ser capaz de usar el nombre que el usuario a escrito en un control *TextBox* en la Vista. Consecuentemente, necesitamos una propiedad en nuestro ViewModel para almacenar este valor. Así es como luce gracias al apoyo en MVVM Light:
 
+{% highlight c# %}
     private string _nombre;
     public string Nombre
     {
@@ -181,11 +198,13 @@ Esta clase nos da acceso a un método llamado **Set()**, que podemos usar cuando
 			Set(ref _nombre, value);
 		}
 	}
+{% endhighlight %}
 
 Este código es muy similar al que ya vimos anteriormente cuando [introdujimos el concepto](https://theshallowbay.github.io/tutoriales/2017/07/02/patron-mvvm-introduccion/#la-interfaz-inotifypropertychanged) de la interfaz *INotifyPropertyChanged*. La única diferencia es que, gracias al método *Set()*, podemos matar dos pájaros de un solo tiro: almacenamos el valor en la propiedad **Nombre** y despachamos una notificación al canal binding de que el valor ha cambiado.
 
 Ahora que sabemos cómo crear propiedades, creamos otra para guardar el mensaje que se mostrará al usuario después de que haya presionado el botón.
 
+{% highlight c# %}
     private string _mensaje;
     public string Mensaje
     {
@@ -198,6 +217,7 @@ Ahora que sabemos cómo crear propiedades, creamos otra para guardar el mensaje 
 			Set(ref _mensaje, value);
 		}
 	}
+{% endhighlight %}
 
 Al final, necesitamos manejar la interacción con el usuario. Cuando él presione el *Botón* en la *Vista*, se debe mostrar el mensaje de hola. Desde un punto de vista lógico, esto significa:
 
@@ -207,6 +227,7 @@ Al final, necesitamos manejar la interacción con el usuario. Cuando él presion
 
 Anteriormente aprendimos que, en el patrón MVVM, se usan los *comandos* para manejar las interacciones del usuario con un ViewModel. Por tal razón, vamos a usar otra de las clases ofrecidas por MVVM Light, que es **RelayCommad**. Gracias a esta clase, en lugar de crear una nueva clase que implemente la interfaz *ICommand* por cada comado, podemos declarar una nueva con el siguiente código:
 
+{% highlight c# %}
     using GalaSoft.MvvmLight.Command;
     
     private RelayCommand _diHola;
@@ -225,6 +246,7 @@ Anteriormente aprendimos que, en el patrón MVVM, se usan los *comandos* para ma
 			return _diHola;
 		}
 	}
+{% endhighlight %}
 
 Cuando se crea un nuevo objeto *RelayCommand* se le tiene que pasar, como parámetro, una ***Action***, que define el código que se quiere ejecutar cuando el comando es invocado. El ejemplo anterior declara la *Action* usando un método anónimo. Eso significa que, en lugar de definir un nuevo método en la clase con un nombre específico, se define en el mismo lugar de la definición de la propiedad, sin asignarle un nombre.
 
@@ -236,6 +258,7 @@ Ahora que el ViewModel está listo, podemos ir a crear la Vista. El paso anterio
 Desde un punto de vista de interfaz de usuario, el XAML que necesitamos escribir para nuestra aplicación es más o menos el mismo que hubierámos creado para una aplicación code-behind. La interfaz, de hecho, no tiene ninguna conexión con la lógica, así que la manera en que la diseñemos no va a cambiar cuando usemos el patrón MVVM. La principal diferencia es que, en una app MVVM, usaremos binding mucho más, porque es la forma en que conectamos los controles con las propiedades en la ViewModel.
 Así es como luce nuestra Vista:
 
+{% highlight html %}
     <Page x:Class="HolaMundo.Views.MainPage"
 		  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -253,6 +276,7 @@ Así es como luce nuestra Vista:
 			</StackPanel>
 		</Grid>
 	</Page>
+{% endhighlight %}
 
 Hemos agregado tres controles:
 1. Un *TextBox*, donde el usuario puede escribir su nombre. Lo hemos conectado a la propiedad **Nombre** del ViewModel. Hay dos características que resaltar:
@@ -268,6 +292,7 @@ Si hemos hecho todo correctamente y lanzamos la aplicación, deberiamos ver la a
 ## Mejoremos un poco la interacción del usuario
 Nuestra aplicación tiene un punto débil: si el usuario presiona el botón sin haber escrito nada en el *TextBox*, solamente verá un "¡Hola!". Queremos evitar este comportamiento deshabilitando el botón si el control *TextBox* está vacío. Para lograr esto, podemos hacer uso de una de las características ofrecidas por la interfaz **ICommand**: podemos definir cuándo un comando debe ser habilitado o no. Para este escenario la clase **RelayCommand** permite un segundo parámetro durante la inicialización, que es una función que devuelve un valor booleano. Veamos un ejemplo:
 
+{% highlight c# %}
     private RelayCommand _diHola;
     public RelayCommand DiHola;
     {
@@ -284,6 +309,7 @@ Nuestra aplicación tiene un punto débil: si el usuario presiona el botón sin 
 			return _diHola;
 		}
 	}
+{% endhighlight %}
 
 Hemos cambiado la inicialización del comando **DiHola** para agregar, como segundo parámetro, un valor booleano: específicamente, comprobamos si la propiedad **Nombre** es nula o está vacía (en este caso, devuelve *false*, si no *true*). Gracias a este cambio, ahora el *Button* conectado a este comando se deshabilitará automaticamente (también desde un punto de vista visual) si la propiedad *Nombre* está vacía. Sin embargo, hay otro problema: si intentamos ejecutar la aplicación tal como está, notaremos que el *Button* estará deshabilitado por defecto cuando la aplicación se inicie. Es el comportamiento esperado, porque cuando la aplicación se lanza el control *TextBox* está vacío por defecto. Sin embargo, si empezamos a escribir texto en el *TextBox*, el *Button* continuará estando deshabilitado.
 
@@ -291,6 +317,7 @@ Hemos cambiado la inicialización del comando **DiHola** para agregar, como segu
 
 La razón de esto es que el ViewModel no puede automaticamente determinar cuando la ejecución del comando **DiHola** necesita ser evaluada de nuevo. Necesitamos hacerlo manualmente cada vez que hagamos algo que pueda hacer cambiar el valor de la función booleana; en nuestro caso, eso pasa cuando cambiamos el valor de la propiedad *Nombre*, así que necesitamos cambiar la definición de la propiedad como en el siguiente ejemplo:
 
+{% highlight c# %}
     private sting _nombre;
     public sring Nombre
     {
@@ -305,6 +332,7 @@ La razón de esto es que el ViewModel no puede automaticamente determinar cuando
 			DiHola.RaiseCanExecuteChanged();
 		}
 	}
+{% endhighlight %}
 
 Además de solamente usar el método *Set()* para almacenar la propiedad y enviar la notifiación a la interfaz de usuario, invocamos el método **RaiseCanExecuteChanged()** del comando *DiHola*. De esta manera, la condición booleana será evaluada de nuevo: si la propiedad *Nombre* contiene algún texto, entonces el comando se habilitará, de otra forma, si queda vacía de nuevo, el comando se deshabilitará.
 
