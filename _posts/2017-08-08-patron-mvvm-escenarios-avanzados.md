@@ -362,7 +362,7 @@ Para esos escenarios la Plataforma Universal de Windows provee una clase llamada
 
 El código que necesita ser ejecutado en el UI Thread se rodea dentro de una *Action*, que es pasada como un parámetro del método asíncrono `RunAsync()`. Para mantener el UI Thread tan libre como sea posible, es importante rodear  dentro de esta acción el código que realmente se necesite ser ejecutado en el UI Thread y no otra lógica. Por ejemplo, si hubiéramos necesitado ejecutar algunas operaciones adicionales antes de fijar la propiedad `Coordenadas` (como convertir las coordenadas en una dirección de calle),  tendríamos que haberlo hecho por fuera del método `RunAsync()`.
 
-## En el próximo post
+**En el próximo post**
 En el próximo post veremos algunas librerías adicionales y helpers que podemos combinar con MVVM Light para hacernos la vida más fácil desarrollando aplicaciones UWP. 
 
 Happy coding!

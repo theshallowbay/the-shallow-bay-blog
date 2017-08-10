@@ -395,7 +395,7 @@ Gracias a este nuevo enfoque, no importa si nuestra aplicación tiene un solo Vi
 
 Este enfoque es extremadamente útil no solo cuando estamos haciendo pruebas, sino también si necesitamos hacer refactorización de código. Digamos que, en algún punto, nuestra aplicación no tiene que recuperar noticias de ningún feed RSS, sino de un servicio REST publicado en la nube. Como nuestro servicio seguirá la misma estructura definida por la interfaz `IServicioRSS` (en nuestro caso, un método *GetNews()* que devuelve una colección de objetos **ItemFeed**) no tendremos que cambiar nada en los ViewModels. Solo necesitamos crear una nueva clase que implemente la interfaz `IServicioRSS` y registrarla en el container, en reemplazo del *ServicioRSS*.
 
-## Para terminar
+**Para terminar**
 Estamos alcanzando el final de nuestro viaje de aprendimiento. En el próximo post veremos algunos escenarios avanzados, como enviar mensajes y manejar eventos secundarios.
 
 Happy coding!
