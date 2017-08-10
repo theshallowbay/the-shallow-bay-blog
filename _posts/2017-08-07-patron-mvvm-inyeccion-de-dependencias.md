@@ -26,6 +26,7 @@ Como la meta del patrón MVVM es separar, tanto como sea posible, las tres difer
 
 Empecemos con el modelo y la defición de una clase, llamada **ItemFeed**, que identifica a un único elemento del feed:
 
+{% highlight c# %}
     public class ItemFeed
     {
         public string Titulo { get; set; }
@@ -34,9 +35,11 @@ Empecemos con el modelo y la defición de una clase, llamada **ItemFeed**, que i
         public string Contenido { get; set; }
         public DateTime FechaPublicacion { get; set; }
     }
+{% endhighlight %}
 
 Ahora podemos crear el servicio que, aprovechando LINQ a XML (un poderoso lenguaje para manipular archivos XML incluído en el framework .NET), puede parsear el feed RSS y convertirlo en una colección de objetos `ItemFeed`:
 
+{% highlight c# %}
     public class ServicioRSS
     {
         public async Task<List<ItemFeed>> ObtenerNoticias(string url)
@@ -56,11 +59,13 @@ Ahora podemos crear el servicio que, aprovechando LINQ a XML (un poderoso lengua
                       
         }
     }
+{% endhighlight %}
 
 La clase `ServicioRSS` tiene un método asíncrono que usa la clase `HttpClient` y su método *GetStringAsync()* para descargar el contenido del feed RSS. Luego, usando LINQ a XML, convertimos el XML en una colección de objetos *ItemFeed*: cada nodo del archivo XML (como *título*, *descripción*, *enlace*, etc.) es guardado en una propiedad del objeto *ItemFeed*.
 
 Ahora tenemos una clase que acepta la URL de un feed RSS de entrada y devuelve una lista de objetos *ItemFeed*, que podemos manipular dentro del ViewModel. Así es como luce el ViewModel de la página que muestra las noticias:
 
+{% highlight c# %}
     public class MainViewModel : ViewModelBase
     {
 	    private List<ItemFeed> _noticias;
@@ -89,7 +94,8 @@ Ahora tenemos una clase que acepta la URL de un feed RSS de entrada y devuelve u
 			}
 		}
 	}
-	    
+{% endhighlight %}	    
+
 Hemos reutilizado el conocimientos adquirido previamente para:
 
 1. Definir una propiedad llamada *Noticias*, cuyo tipo es `List<ItemFeed>`, donde vamos a almacenar la lista de noticias, que se mostrarán en la página.
@@ -97,6 +103,7 @@ Hemos reutilizado el conocimientos adquirido previamente para:
 
 Al final, podemos crear la página XAML:
 
+{% highlight html %}
 ```
     <Page
     x:Class="UniverseLector.MainPage"
@@ -130,6 +137,7 @@ Al final, podemos crear la página XAML:
     </Page.BottomAppBar>
  </Page>
 ```
+{% endhighlight %}
 
 En la página hemos agregado:
 
@@ -145,6 +153,7 @@ Digamos que, en algún punto, necesitamos reemplazar la clase *ServicioRSS* con 
 
 En nuestra aplicación de ejemplo, no es tan difícil lograr esto. Solamente necesitamos crear una nueva clase (por ejemplo, *ServicioRSSFalso*) que devuelve un conjunto de objetos **ItemFeed** falsos, como el siguiente:
 
+{% highlight c# %}
 ```
 using System;
 using System.Collections.Generic;
@@ -193,11 +202,12 @@ namespace UniverseLector.Services
     }
 }
 ```
+{% endhighlight %}
 
  Ahora necesitamos cambiar nuestro código a ejecutar cuando se ejecute el *CargarComando* para usar esta nueva clase como reemplazo de la anterior:
  
+ {% highlight c# %}
  ```
- 
  public class MainViewModel : ViewModelBase
     {
         private ObservableCollection<ItemFeed> _noticias;
@@ -227,6 +237,7 @@ namespace UniverseLector.Services
     }
     
 ```
+{% endhighlight %}
 
 ![](https://i.imgur.com/qqHIL5d.gif)
 
@@ -250,17 +261,20 @@ Para esto es que se utilizan las interfaces: su propósito es describir un conju
 
 Empecemos creando una interfaz llamada *IServicioRSS*:
 
+{% highlight c# %}
 ```
 public interface IServicioRSS
     {
         Task<List<ItemFeed>> ObtenerNoticias(string url);
     }
 ```
+{% endhighlight %}
 
 Nuestro servicio, por el momento, expone solamente una operación asincrónica: **ObtenerNoticias()**, que toma la URL de entrada del feed RSS y devuelve, como salida, una colección de objetos **ItemFeed**.
 
 Ahora tenemos que cambiar nuestras clases *ServicioRSS* y *ServicioRSSFalso* para que implementen esta interfaz, solo debemos agregar, después del nombre de la clase, dos puntos y el nombre de la interfaz, como si se tratara de una herencia de otra clase:
 
+{% highlight c# %}
     public class ServicioRSS : IServicioRSS
     {
     ...
@@ -270,6 +284,7 @@ Ahora tenemos que cambiar nuestras clases *ServicioRSS* y *ServicioRSSFalso* par
     {
     ...
     }
+{% endhighlight %}
 
 Como puedes ver, ambos servicios están usando la misma interfaz e implementan el mismo método: la única diferencia es que la clase *ServicioRSS* devuelve datos reales, mientras que *ServicioRSSFalso* está creando manualmente un conjunto de objetos **ItemFeed** falsos.
 
@@ -281,6 +296,7 @@ Hay un par de cambios que necesitamos hacerle a nuestro ViewModel:
 
 Así es como el ViewModel actualizado luce:
 
+{% highlight c# %}
 ```
 public class MainViewModel : ViewModelBase
     {
@@ -318,12 +334,14 @@ public class MainViewModel : ViewModelBase
         }
     }
 ```
+{% endhighlight %}
 
 ### El ViewModelLocator
 El último paso y el más importante, el cual es crear el container y registrar todos los ViewModels con sus dependencias. Típicamente esta configuración se hace cuando la aplicación se lanza, así que, cuando usamos MVVM Light y el enfoque con ViewModelLocator, el mejor lugar para hacerlo es en el ViewModelLocator mismo, porque es la clase que se ocupa de despachar todos los ViewModels.
 
 Así es como nuestra nueva implementación del ViewModelLocator luce:
 
+{% highlight c# %}
 ```
 public class ViewModelLocator
     {
@@ -344,6 +362,7 @@ public class ViewModelLocator
         }
     }
 ```
+{% endhighlight %}
 
 Lo primero es, que necesitamos resaltar que este código es solamente un ejemplo: hay muchas librerías disponibles para implementar el enfoque de inyección de dependencias, como Ninject o LightInject. Sin embargo, la mayoría de los toolkits y frameworks MVVM proveen también una infraestructura para manejar estos escenarios y MVVM Light no es la excepción, al proveer un container simple identificado por la clase **SimpleIoc**, que es configurada como container por defecto por la aplicación al usar el método *SetLocationProvider()* de la clase **ServiceLocator**.
 
@@ -362,11 +381,15 @@ Después de haber terminado esos cambios, esto es lo que pasará cuando lancemos
 
 Si alguna de las condiciones previas no se satisfacen (por ejemplo, el container no encuentra una clase registrada para la interfaz *IServicioRSS*), obtendremos una excepción, porque el container no pudo resolver todas las dependencias. Ahora que hemos alcanzado el fin de nuestro viaje, debes ser capaz de entender porqué la inyección de dependencias es extemadamente útil para nuestro escenario. Tan pronto como hagamos algunas pruebas y queramos usar la clase *ServicioRSSFalso* en reemplazo de *ServicioRSS*, solo necesitaríamos cambiar una línea de código en la clase *ViewModelLocator*. En lugar de:
 
+{% highlight c# %}
     SimpleIoc.Default.Register<IServicioRSS, ServicioRSS>();
+{% endhighlight %}
 
 tendríamos que escribir:
 
+{% highlight c# %}
     SimpleIoc.Default.Register<IServicioRSS, ServicioRSSFlaso>();
+{% endhighlight %}
 
 Gracias a este nuevo enfoque, no importa si nuestra aplicación tiene un solo ViewModel o si tiene 50 que dependen de la interfaz `IServicioRSS`: automáticamente, el container se encargará de intectar la clase real apropiada a cualquiera de ellos.
 

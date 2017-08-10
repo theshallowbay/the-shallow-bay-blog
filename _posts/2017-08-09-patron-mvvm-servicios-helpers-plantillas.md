@@ -20,6 +20,7 @@ En [uno](https://theshallowbay.github.io/tutoriales/2017/08/07/patron-mvvm-inyec
 
 Digamos que estás desarrollando una increíble aplicación que necesita mostrar un cuadro de diálogo al usuario. Aplicando el conocimiento que aprendimos en los posts anteriores, terminarías con un comando como este:
 
+{% highlight c# %}
     private RelayCommand _mostrarDialogoComando;
     public RelayCommand MostrarDialogoComando
     {
@@ -36,18 +37,22 @@ Digamos que estás desarrollando una increíble aplicación que necesita mostrar
             return _mostrarDialogoComando;
         }
     }
+{% endhighlight %}
 
 El comando va a mostrar un diálogo usando una API específica de la UWP, que es la clase `MessageDialog`. Ahora digamos que, tu cliente te pide portar esta increíble aplicación a otra plataforma, como Android o iOS, usando Xamarin, la tecnología multiplataforma que permite crear aplicaciones para los principales sistemas operativos móviles usando C# y el framework .NET. En este escenario, tu ViewModel tiene un problema: no lo puedes reusar tal como está para usarlo en Android o iOS, porque esos sistemas usan una API diferente para mostrar un cuadro de diálogo. Mover código específico de plataforma a un servicio es la mejor forma de solucionar este problema: la meta es cambiar nuestro ViewModel de tal forma que solo describa la operación a hacer (mostrar un diálogo) sin implementar nada realmente.
 
 Empecemos creando una interfaz, que describe las operaciones a llevar a cabo:
 
+{% highlight c# %}
     public interface IDialogoServicio
     {
         Task MostrarDialogoAsync(string mensaje);
     }
+{% endhighlight %}
 
 Esta interfaz será implementada por una clase real, que será diferente en cada plataforma. Por ejemplo, la implementación para la Plataforma Universal de Windows lucirá como sigue:
 
+{% highlight c# %}
     public class DialogoServicio : IDialogoServicio
     {
         public async Task MostrarDialogoAsync(string mensaje)
@@ -56,9 +61,11 @@ Esta interfaz será implementada por una clase real, que será diferente en cada
             await dialogo.ShowAsync();
         }
     }
+{% endhighlight %}
 
 En Xamarin.Android, en cambio, necesitaremos usar la clase `AlertDialog`, que es específica para Android:
 
+{% highlight c# %}
 ```
 public async Task MostrarDialogoAsync(string mensaje)
 {
@@ -79,11 +86,11 @@ public async Task MostrarDialogoAsync(string mensaje)
     await Task.Yield();
 }
 ```
-
-
+{% endhighlight %}
 
 Ahora que hemos movido las APIs específicas de plataforma en un servicio, podemos usar la inyección de dependencias (que ya hemos descrito antes), para usar, en el ViewModel, la interfaz en lugar de la clase real. De esta manera, nuestro comando solamente describirá la operación que debe llevar a cabo, delegando a la clase `DialogService` a que efectivamente ejecute el código. Con este nuevo enfoque, el ViewModel añadirá una dependencia a la clase `IDialogoServicio` en el constructor, como en el siguiente ejemplo:
 
+{% highlight c# %}
     public class MainViewModel : ViewModelBase
     {
         private readonly IDialogoServicio _dialogoServicio;
@@ -92,9 +99,11 @@ Ahora que hemos movido las APIs específicas de plataforma en un servicio, podem
             _dialogoServicio = dialogoServicio;
         }
     }
+{% endhighlight %}
 
 Entonces cambiamos nuestro comando de la siguiente manera:
 
+{% highlight c# %}
     private RelayCommand _mostrarDialogoComando;
     public RelayCommand MostrarDialogoComando
     {
@@ -110,6 +119,7 @@ Entonces cambiamos nuestro comando de la siguiente manera:
             return _mostrarDialogoComando;
         }
     }
+{% endhighlight %}
 
 Al usar la inyección de dependencias, la aplicación Android va a registrar en el container la implementación del `DialogoServicio` que use las APIs de Android; y viceversa, la aplicación UWP va a registrar en cambio, la implementación que use las APIs de UWP. Ahora nuestro ViewModel puede compartirse así como está entre las dos versiones de la aplicación, sin hacerle ningún cambio. Podemos mover el ViewModel, por ejemplo, en una PCL (Portable Class Library), que puede compartirse entre las versiones de la aplicación de Windows, Xamarin Android, Xamarin iOS, WPF, etc.
 
@@ -124,14 +134,17 @@ Por favor démosle la bienvenida a **Fody**, una librería que puede cambiar el 
 
 Por ejemplo, el siguiente código:
 
+{% highlight c# %}
     [ImplementPropertyChanged]
     public class MainViewModel : ViewModelBase
     {
 	    public string Mensaje { get; set; }
 	}
+{% endhighlight %}
 
 Queda convertido en esto:
 
+{% highlight c# %}
     public class MainViewModel : ViewModelBase, INotifyPropertyChanged
     {
 	    private string _mensaje;
@@ -145,16 +158,19 @@ Queda convertido en esto:
 			}
 		}
 	}
+{% endhighlight %}
 
 De esta forma, podemos simplificar el código que necesitamos escribir en nuestro ViewModel y hacerlo menos verboso. Para usar este atributo especial, necesitamos:
 
 1. Instalar el paquete llamado *Fody.PropertyChanged* desde NuGet
 2. Para funcionar correctamente, Fody requiere un archivo XML especial en la raíz del proyecto, que describa cuál es el añadido a aplicar en tiempo de compilación. El nombre de este archivo es *FodyWeavers.xml* y el contenido debe ser algo como esto:
 
+{% highlight html %}
     <?xml version="1.0" encoding="utf-8" ?>
     <Weavers>
         <PropertyChanged />
     </Weavers>
+{% endhighlight %}
 
 Y eso es todo.
 

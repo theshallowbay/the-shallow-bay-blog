@@ -104,7 +104,7 @@ En caso de que Visual Studio marque un error subrayado en azul, diciendo que *Ma
 
 Ahora se puede usar esta key y la palabra clave **StaticResource** para conectar el *DataContext* de la página al recurso, como en el siguiente ejemplo:
 
-{% highlight xaml %}
+{% highlight html %}
     <Page x:Class="HolaMundo.Views.MainPage"
 		  DataContext="{Binding Source={StaticResource MainViewModel}}"
 		  mc:Ignorable="d">
@@ -152,7 +152,7 @@ O, como alternativa, se puede simplificar el código usando una de las caracter�
 
 Después de haber agregado la clase *ViewModelLocator* como un recurso global, se podrá usar para conectar la propiedad **Main** a la propiedad *DataContext* de la página, como en el siguiente ejemplo:
 
-{% highlight xaml %}
+{% highlight html %}
     <Page x:Class="HolaMundo.Views.MainPage"
 	      DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
 	      mc:Ignorable="d">

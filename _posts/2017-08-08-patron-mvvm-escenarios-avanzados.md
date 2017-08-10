@@ -30,6 +30,7 @@ Veamos un ejemplo real. El primer paso es agregar el Behaviors SDK a nuestro pro
 
 El siguiente paso es declarar, en la página XAML, los nombres de espacios (*namespaces*) del SDK, que se requieren para usar los behaviors: `Microsoft.Xaml.Interactivity` y `Microsoft.Xaml.Interactions.Code`, como en el siguiente ejemplo:
 
+{% highlight html %}
     <Page
         x:Class="GeoLocate.MainPage"
         xmlns:core="using:Microsoft.Xaml.Interactions.Core"
@@ -37,6 +38,7 @@ El siguiente paso es declarar, en la página XAML, los nombres de espacios (*nam
         mc:Ignorable="d">
     
     </Page>
+{% endhighlight %}
 
 Gracias a esos namespaces, podrás usar las siguientes clases:
 
@@ -45,6 +47,8 @@ Gracias a esos namespaces, podrás usar las siguientes clases:
 
 Así es como se aplican para manejar la selección de elementos de una lista:
 
+{% highlight html %}
+```
     <ListView ItemsSource="{Binding Path=Noticias}"
                       SelectedItem="{Binding Path=ElementoSeleccionado, Mode=TwoWay}">
                 <interactivity:Interaction.Behaviors>
@@ -52,7 +56,9 @@ Así es como se aplican para manejar la selección de elementos de una lista:
                         <core:InvokeCommandAction Command="{Binding Path=ComandoElementoSeleccionado}" />
                     </core:EventTriggerBehavior>
                 </interactivity:Interaction.Behaviors>
-            </ListView>
+    </ListView>
+```
+{% endhighlight %}
 
 El behavior es declarado como su fuese una propiedad compleja de un control y, como tal, es incluído entre el inicio y el final de la etiqueta del control mismo (en este caso, entre  `<ListView>` y `</ListView>`. La declaración del behavior es incluída dentro de una colección llamada *Interaction.Behaviors*, que hace parte del namespace *Microsoft.Xaml.Interactivity*. Es una colección dado que puedes aplicar más de un behavior al mismo control. En este caso, estamos agregando el `EventTriggerBehavior` mencionado anteriormente que requiere, mediante el uso de la propiedad `EventName` el nombre del evento del control que queremos manejar. En este caso, queremos manejar la selección de un elemento de la lista, entonces enlazamos esta propiedad al evento llamado `SelectionChanged`.
 
@@ -60,23 +66,25 @@ Ahora que el behavior está enlazado al evento, podemos declarar qué action que
 
 La tarea está ahora terminada: cuando el usuario seleccione un elemento de la lista, el comando llamado `ItemSelectedCommand` será invocado. Desde un punto de vista del ViewModel, no hay ninguna diferencia entre un comando estándar y un comando conectado a un behavior, como se puede ver en el siguiente ejemplo:
 
+{% highlight c# %}
     private RelayCommand _comandoElementoSeleccionado;
-        public RelayCommand ComandoElementoSeleccionado
+    public RelayCommand ComandoElementoSeleccionado
+    {
+        get
         {
-            get
+            if (_comandoElementoSeleccionado == null)
             {
-                if (_comandoElementoSeleccionado == null)
+                _comandoElementoSeleccionado = new RelayCommand(() =>
                 {
-                    _comandoElementoSeleccionado = new RelayCommand(() =>
-                    {
-                        debug.WriteLine(ElementoSeleccionado.Titulo);
-                    });
-                }
-    
-                return _comandoElementoSeleccionado;
-    
+                    debug.WriteLine(ElementoSeleccionado.Titulo);
+                });
             }
+    
+            return _comandoElementoSeleccionado;
+    
         }
+    }
+{% endhighlight %}
 
 Este comando se encarga de mostrar, en una ventana de salida de Visual Studio (usando el método *Debug.WriteLine()*) el título del elemento seleccionado. **ElementoSeleccionado** es otra propiedad del ViewModel que es conectada, usando binding, a la propiedad **SelectedItem** del control *ListView*. De esta forma, la propiedad siempre almacenará una referencia al elemento seleccionado por el usuario en la lista.
 
@@ -93,16 +101,19 @@ Al final, un emisor puede enviar un mensaje sin conocer de antemano quién va a 
 ### El mensaje
 El primer paso es crear el mensaje que queremos que el emisor envíe de una clase a otra. Un mensaje es solo una clase simple: creemos una clase llamada *Mensajes* (es algo opcional, pero se hace para mantener una estrutura del proyecto limpia) y luego creemos una nueva clase dentro de esa carpeta. Así es como nuestro mensaje luce:
 
+{% highlight c# %}
     public class EmpezarAnimacionMensaje
     {
 
     }
+{% endhighlight %}
 
 Como puedes ver, es solo una clase. En nuestro caso está vacía, dado que solamente necesitamos disparar una action. También puede tener una o más propiedades en caso de que, además de disparar una action, necesites también enviar datos de una clase a otra.
 
 ### El emisor
 Ahora veamos cómo nuestro ViewModel puede enviar el mensaje que acabamos de definir. Podemos hacerlo usando la clase `Messenger`, incluída en el namespace *GalaSoft.MvvmLight.Messaging*. En nuestro ejemplo, asumimos que la animación se disparará cuando el usuario presione un botón. Consecuentemente, usamos la clase *Messenger* dentro de un comando, como en el siguiente ejemplo:
 
+{% highlight c# %}
         private RelayCommand _empezarAnimacionComando;
         public RelayCommand EmpezarAnimacionComando
         {
@@ -119,6 +130,7 @@ Ahora veamos cómo nuestro ViewModel puede enviar el mensaje que acabamos de def
                 return _empezarAnimacionComando;
             }
         }
+{% endhighlight %}
 
 Enviar un mensaje es fácil. Usamos la propiedad *Default* de la clase *Messenger* para obtener acceso a la instancia estática del emisor. ¿Por qué estática? Porque, para funcionar apropiadamente, necesita ser la misma instancia para toda la aplicación, de otra forma no podrá despachar y recibir mensajes que vengan de diferentes clases. Para enviar un mensaje usamos el método *Send<T>* donde `T` es el tipo de mensaje que queremos enviar. Como parámetro, necesitamos pasarle una nueva instancia de la clase que hemos previamente creado para definir un mensaje: en nuestro ejemplo, es la que se llama `EmpezarAnimacionMensaje`.
 
@@ -127,6 +139,7 @@ Ahora el mensaje ha sido enviado y está listo para ser recibido por otra clase.
 ### El receptor
 El primer paso, antes de hablar acerca de cómo recibir un mensaje, es definir en la página XAML la animación que queremos disparar cuando el botón sea presionado, al usar la clase `Storyboard`: 
 
+{% highlight c# %}
     <Page
         x:Class="GeoLocate.MainPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -165,6 +178,7 @@ El primer paso, antes de hablar acerca de cómo recibir un mensaje, es definir e
         </Page.BottomAppBar>
         
     </Page>
+{% endhighlight %}
 
 Hemos incluído un control `Rectangle` y se le ha aplicado un `TranslateTransform`. Es una de las transformaciones incluídas en XAML, que podemos usar para mover un control en la página simplemente cambiando sus coordenadas en los ejes X, Y. La animación que vamos a crear se aplicará a esta transformación y cambiará las coordenadas del control.
 
@@ -189,13 +203,16 @@ Cuando trabajas con mensajes, es importante recordar que que tal vez hayas confi
 
 Por esta razón, la clase *Messenger* ofrece un método llamado `Unsubscribe<T>()` para detener la recepción de mensajes cuyo tipo sea `T`. Típicamente, cuando necesites interceptar mensajes en una clase code-behind, necesitarás recordar llamar al método mencionado en el evento `OnNavigatedFrom()`, así, cuando el usuario salga de la página dejará de recibir mensajes.
 
+{% highlight c# %}
     protected override void OnNavigatedFrom(NavigationEventArgs e)
     {
         Messenger.Default.Unregister<EmpezarAnimacionMensaje>(this);
     }
+{% endhighlight %}
 
 Por la misma razón, también es mejor mover el método `Register<T>()` del constructor al método `OnNavigatedTo()` de la página, para asegurarse que cuando el usuario navegue de nuevo a la página, ésta podrá de nuevo recibir mensajes.
 
+{% highlight c# %}
     protected override void OnNavigatedTo(NavigationEventArgs e)
     {
         Messenger.Default.Register<EmpezarAnimacionMensaje>(this, message =>
@@ -203,6 +220,7 @@ Por la misma razón, también es mejor mover el método `Register<T>()` del cons
             RectanguloAnimacion.Begin();
         });
     }
+{% endhighlight %}
 
 ## Trabajando con threads (hilos)
 La interfaz de usuario de una aplicación UWP es manejada por un único hilo, o *thread*, llamado **UI Thread**.  Es algo crítico dejar este hilo tan libre como nos sea posible; si empezamos a ejecutar muchas operaciones sobre él, la interfaz de usuario puede volverse *unresponsive* (que no responda) y lenta de usar. Sin embargo, en algún punto, podemos necesitar acceder a ése hilo, por ejemplo, porque necesitamos mostrar el resultado de una operación en un control ubicado en una página. Por esta razón, la mayoría de las APIs de la Universal Windows Platform son implementadas usando el patrón ***async / await***, el cual se asegura que las operaciones demoradas no se ejecuten en en UI Thread, dejándolo libre para procesar la interfaz de usuario y las interacciones del usuario. Al mismo tiempo, el resultado se devuelve automáticamente en el UI Thread, de forma que esté inmediatamente listo para ser usado por cualquier control en la página.
@@ -213,6 +231,8 @@ Sin embargo, hay algunos escenario donde este despacho no se hace automáticamen
 
 Así es como luce nuestro ViewModel:
 
+{% highlight c# %}
+```
 public class MainViewModel : ViewModelBase
 {
     private readonly Geolocator _geolocator;
@@ -253,11 +273,14 @@ public class MainViewModel : ViewModelBase
         Coordenadas = $"{args.Position.Coordinate.Point.Position.Latitude}, {args.Position.Coordinate.Point.Position.Longitude}";
     }
 }
+```
+{% endhighlight %}
 
 Cuando el ViewModel es creado, inicializamos la clase *Geolocator* requerida para interactuar con los servicios de localización del teléfono. Entonces, en el *IniciarGeolocalizacionComando*, definimos una action que se suscribe al evento `PositionChanged` del *Geolocator*: desde ahora, el dispositivo empezará a detectar la ubicación del usuario y disparará el evento cada vez que la ubicación cambie. En el manejador del evento definimos la propiedad *Coordenadas* con un `string`, que es la combinación de las propiedades `Latitude` y `Longitude` devueltas por el manejador.
 
 La View es muy sencilla: es un Button (conectado a la propiedad `IniciarGeolocalizacionComando`) y un TextBlock (conectado a la propiedad `Coordenadas`).
 
+{% highlight html %}
     <Page
         x:Class="TrackMe.MainPage"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -276,6 +299,7 @@ La View es muy sencilla: es un Button (conectado a la propiedad `IniciarGeolocal
             </StackPanel>
         </Grid>
     </Page>
+{% endhighlight %}
 
 Si ejecutamos la aplicación y presionamos el botón, notaremos que, después de unos pocos segundos, Visual Studio arrojará un error como este:
 
@@ -285,6 +309,7 @@ La razón de esto es que, para mantener el UI Thread libre, el manejador de even
 
 Para esos escenarios la Plataforma Universal de Windows provee una clase llamada `Dispatcher`, que tiene la capacidad de despachar una operación en el UI Thread, sin importar cuál es el hilo donde está siendo ejecutada. El problema es que, típicamente, esta clase solo es accesible desde el code-behind, haciéndose díficil de usar desde un ViewModel. Consecuentemente, la mayoría de los toolkits MVVM proveen una forma de acceder al dispatcher también desde un ViewModel. En MVVM Light, se representa con la clase `DispatcherHelper`, que requiere ser inicializada cuando la aplicación  se inicia en el método `OnLaunched()` de la clase `App`:
 
+{% highlight c# %}
     protected override void OnLaunched(LaunchActivatedEventArgs e)
             {
                 Frame rootFrame = Window.Current.Content as Frame;
@@ -321,9 +346,11 @@ Para esos escenarios la Plataforma Universal de Windows provee una clase llamada
                     Window.Current.Activate();
                 }
             }
+{% endhighlight %}
 
 `DispatcherHelper` es una clase estática, por lo que se puede llamar directamente al método `Initialize()` sin tener que crear una nueva instancia. Ahora que está inicializada, podemos empezar a utilizarla en nuestros ViewModels:
 
+{% highlight c# %}
     private async void _geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
     {
         await DispatcherHelper.RunAsync(() =>
@@ -331,6 +358,7 @@ Para esos escenarios la Plataforma Universal de Windows provee una clase llamada
             Coordenadas = $"{args.Position.Coordinate.Point.Position.Latitude}, {args.Position.Coordinate.Point.Position.Longitude}";
         });
     } 
+{% endhighlight %}
 
 El código que necesita ser ejecutado en el UI Thread se rodea dentro de una *Action*, que es pasada como un parámetro del método asíncrono `RunAsync()`. Para mantener el UI Thread tan libre como sea posible, es importante rodear  dentro de esta acción el código que realmente se necesite ser ejecutado en el UI Thread y no otra lógica. Por ejemplo, si hubiéramos necesitado ejecutar algunas operaciones adicionales antes de fijar la propiedad `Coordenadas` (como convertir las coordenadas en una dirección de calle),  tendríamos que haberlo hecho por fuera del método `RunAsync()`.
 
