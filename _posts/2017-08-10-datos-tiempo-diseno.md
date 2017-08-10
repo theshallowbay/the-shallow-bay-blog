@@ -35,6 +35,7 @@ Veamos en detalle los cambios que tenemos que hacer. Vamos a usar el mismo ejemp
 
 Entonces, la interfaz es implementada por dos clases: una llamada *ServicioRSS*, que provee los datos reales desde un feed RSS real, y otra llamada *ServicioRSSFalso*,  que provee datos estáticos falsos.
 
+{% highlight c# %}
     public class ServicioRSS : IServicioRSS
     {
         public async Task<List<ItemFeed>> ObtenerNoticias(string url)
@@ -90,12 +91,14 @@ Entonces, la interfaz es implementada por dos clases: una llamada *ServicioRSS*,
             return Task.FromResult(items);
         }
     }
+{% endhighlight%}
 
 Antes de empezar a explorar los cambios que necesitamos hacer en la aplicación para que soporte los datos en tiempo de diseño, habría que resaltar una posible solución para manejar operaciones asíncronas. Uno de los desafíos de crear datos falsos viene del hecho que, típicamente, los servicios reales usan métodos asíncronos (dado que obtienen los datos de una fuente que puede tomarse su tiempo en procesarlos). El *ServicioRSS* es un buen ejemplo: como el método `ObtenerNoticias()` es asíncrono, tiene que devolver un objeto `Task<T>`, de forma que pueda ser apropiadamente llamado por nuestro ViewModel usando la palabra clave *await*. Sin embargo, es muy improbable que el servicio falso necesite usar métodos asíncronos: solo devueve datos estáticos. El problema es que, como los dos servicios implementan la misma interfaz, no podemos tener un servicio que devuelva operaciones `Task` mientras el otro devuelva objetos planos. Como solución, como puedes ver dle código de ejemplo, se puede usar el método `FromResult()`  de la clase `Task`. Su propósito es encapsular dentro de un objeto  `Task` una respuesta simple. En este caso, como el método `ObtenerNoticias()` devuelve una respuesta `Task<List<ItemFeed>>`, creamos una colección falsa de `List<ItemFeed>` y se la pasamos al método `Task.FromResult()`. De esta forma, incluso si el método no es asíncrono, se comportará como si lo fuera, y así podemos mantener la misma firma definida por la interfaz.
 
 ### El ViewModeLocator
 El primer cambio que vamos a hacer es en el *ViewModelLocator*. En nuestra aplicación de ejemplo tenemos el siguiente código, que registra en el container de dependencias la interfaz `IServicioRss` con la implementación de `ServicioRSS`:
 
+{% highlight c# %}
     public class ViewModelLocator
     {
         public ViewModelLocator()
@@ -108,9 +111,11 @@ El primer cambio que vamos a hacer es en el *ViewModelLocator*. En nuestra aplic
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
     }
+{% endhighlight%}
 
 Necesitamos cambiar el código de tal forma que, basado en la forma en que la aplicación está siendo renderizada, se use el servicio apropiado. Podemos usar la propiedad `IsInDesignModeStatic` ofrecida por la clase `ViewModelBase` para detectar si la aplicación está siendo ejecutada o renderizada por el diseñador:
 
+{% highlight c# %}
     public class ViewModelLocator
     {
         public ViewModelLocator()
@@ -131,12 +136,14 @@ Necesitamos cambiar el código de tal forma que, basado en la forma en que la ap
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
     }
+{% endhighlight%}
 
 En el caso de que la aplicación está siendo renderizada en el diseñador, conectamos la interfaz `IServicioRSS` con la clase `ServicioRSSFalso`, que devuelve datos falsos. Si la aplicación se está ejecutando, en cambio, conectamos la interfaz `IServicioRSS` con la clase `ServicioRSS`.
 
 ### El ViewModel
 Para poder hacer uso de los datos en tiempo de diseño, también necesitamos cambiar un poco el ViewModel. La razón es que, cuando la aplicación está siendo renderizada en el diseñador, en realidad no se está ejecutando; el diseñador se encarga de inicializar todas las clases requeridas (como el *ViewModelLocator* o los diferentes ViewModels), pero no ejecuta todos los eventos de la página. Como tal, dado que típicamente la aplicación carga los datos basándose en los eventos como `OnNavigatedTo()` o `Loaded`, nunca los veremos en el diseñador. Nuestra aplicación es un buen ejemplo de este escenario: en nuestro ViewModel tenemos un `RelayCommand` llamado *ComandoCargar*, que se encarga de obtener los datos del *ServicioRSS*:
 
+{% highlight c# %}
         private RelayCommand _comandoCargar;
         public RelayCommand ComandoCargar
         {
@@ -153,7 +160,8 @@ Para poder hacer uso de los datos en tiempo de diseño, también necesitamos cam
 
                 return _comandoCargar;
             }
-        }
+        }        
+{% endhighlight%}
 
 Al usar el Behaviors SDK, tal como se describió en este [otro](https://theshallowbay.github.io/tutoriales/2017/08/08/mvvm-escenarios-avanzados/#manejando-eventos-adicionales-con-comandos) post, conectamos este comando con el evento `Loaded` de la página:
 
